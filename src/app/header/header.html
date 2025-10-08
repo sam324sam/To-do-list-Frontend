@@ -2,23 +2,31 @@
   <aside>
     <ul>
       <li>
-        <a routerLink="/" title="Inicio"><img src="header/logo.png" alt=""></a>
+        <a routerLink="/" title="Inicio"><img src="header/logo.png" alt="" /></a>
       </li>
       <li>
-        <a routerLink="/tareas" title="Listas"><i class="fa-solid fa-list"></i></a>
+        <a routerLink="/allList" title="Listas"><i class="fa-solid fa-list"></i></a>
       </li>
       <li>
-        <a routerLink="/configuracion" title="Añadir lista"><i class="fa-solid fa-plus"></i></a>
+        <a routerLink="/addList" title="Añadir lista"><i class="fa-solid fa-plus"></i></a>
       </li>
     </ul>
 
     <ul>
+      @if (isLoggedIn) {
       <li>
         <a routerLink="/perfil" title="Perfil"><i class="fa-solid fa-user"></i></a>
       </li>
       <li>
-        <a routerLink="/perfil" title="Cerrar secion"><i class="fa-solid fa-right-from-bracket"></i></a>
+        <a (click)="logout()" title="Cerrar secion"
+          ><i class="fa-solid fa-right-from-bracket"></i
+        ></a>
       </li>
+      }@else {
+      <li>
+        <a routerLink="/login" title="Perfil"><i class="fa-solid fa-user"></i></a>
+      </li>
+      }
     </ul>
   </aside>
 </header>

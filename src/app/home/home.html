@@ -42,12 +42,34 @@
     </div>
   </div>
 </div>
-
+<!--Para saber si esta logeado y darle el boton de inicio de sesion-->
+@if ( !isLoggedIn ) {
 <div class="second-container">
-    <div class="cell">
-        <a routerLink="login" class="login">Inicia sesion</a>
-    </div>
-    <div class="cell">
-        ¿No tienes cuenta? <a routerLink="/register" class="register">registrate aqui</a>
-    </div>
+  <div class="cell">
+    <a routerLink="login" class="login">Inicia sesion</a>
+  </div>
+  <div class="cell">
+    ¿No tienes cuenta? <a routerLink="/register" class="register">registrate aqui</a>
+  </div>
 </div>
+}@else {
+<div class="third-container">
+  <h1>Empieza ordenandoi tus tareas</h1>
+  <div class="flex-row">
+    <div class="cell" routerLink="/ver-listas">
+      <h2>Ver mis listas</h2>
+      <img src="https://img.icons8.com/ios-filled/512/622/todo-list.png" alt="Ver mis listas" />
+    </div>
+
+    <div class="cell" routerLink="/añadir-listas">
+      <h2>Añadir una lista</h2>
+      <img src="https://img.icons8.com/ios-filled/512/622/add-file.png" alt="Añadir listas" />
+    </div>
+
+    <div class="cell" routerLink="/buscar-listas">
+      <h2>Buscar listas</h2>
+      <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Buscar" />
+    </div>
+  </div>
+</div>
+}

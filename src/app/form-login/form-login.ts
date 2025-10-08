@@ -21,25 +21,20 @@ export class FormLogin {
   constructor(private readonly authService: AuthService, private readonly router: Router) {}
 
   login() {
-    interface User {
-      username: string;
-      password: string;
-    }
-
     interface LoginResponse {
       // Define el tipo de la respuesta segun lo que devuelva tu API (Luego ver si las cambiamos to-do a string)
       [key: string]: any;
     }
-
+    // Llamar al servicio de auntetificacion
     this.authService.login(this.user.username, this.user.password).subscribe({
       next: (response: LoginResponse) => {
-        console.log('Usuario registrado', response);
-        alert('Registro exitoso');
+        console.log('Usuario iniciado', response);
+        alert('Inicio de sesion exitoso');
         this.router.navigate(['']);
       },
       error: (error: any) => {
-        console.error('Error en el registro', error);
-        alert('Error en el registro');
+        console.error('Error en el inicio de sesion', error);
+        alert('Error en el inicio de sesion');
       },
     });
   }

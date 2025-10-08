@@ -1,7 +1,7 @@
 .first-container {
   width: 90%;
   max-width: 1700px;
-  margin: 7em auto 2em auto;
+  margin: 6em auto 2em auto;
   border-radius: 2em;
   padding: 3em;
   background-color: var(--color-mint-green);
@@ -279,6 +279,50 @@
 .register:hover {
   color: var(--color-ucla-blue);
   transform: translateY(-2px);
+}
+
+/*Contenedor de cuando estas logeado*/
+.third-container {
+  width: 80%;
+  max-width: 1700px;
+  margin: auto;
+  border-radius: 2em;
+  padding: 3em;
+  background-color: var(--color-mint-green);
+  box-shadow: 0 20px 60px rgba(29, 51, 84, 0.3), 0 0 0 1px rgba(29, 51, 84, 0.05);
+  animation: containerFadeIn 0.8s ease-out;
+}
+
+.third-container h1 {
+  text-align: center;
+}
+
+.third-container .cell {
+  flex-direction: column;
+}
+
+.third-container .cell img {
+  width: 40%;
+  height: auto;
+  filter: drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.3));
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.third-container .cell img:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0px 6px 8px rgba(0, 0, 0, 0.4));
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1em;
+}
+
+.third-container .flex-row{
+  margin-top: 1em;
 }
 /* Responsive */
 @media (max-width: 600px) {

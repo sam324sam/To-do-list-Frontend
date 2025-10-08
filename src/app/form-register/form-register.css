@@ -260,3 +260,14 @@ form {
 .form-group input:focus::placeholder {
   animation: pulse 1.5s ease infinite;
 }
+
+/* Estilo para inputs con errores del backend - MUY IMPORTANTE el !important para priorizarlo por encima del validado*/
+.form-group input.backend-error-input {
+  border-color: var(--color-poppy) !important;
+  background: #fff5f5 !important;
+}
+
+.form-group input.backend-error-input:focus {
+  border-color: var(--color-poppy) !important;
+  box-shadow: 0 0 0 4px rgba(227, 63, 63, 0.1) !important;
+}

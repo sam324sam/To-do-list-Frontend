@@ -1,51 +1,76 @@
 import { Component } from '@angular/core';
-// Peticiones HTTP
 import { HttpClient } from '@angular/common/http';
-// Formularios reactivos
 import { FormsModule } from '@angular/forms';
-// Router para redigir
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-form-register',
-  imports: [FormsModule], // Importar FormsModule para usar formularios reactivos
+  imports: [FormsModule, CommonModule],
   templateUrl: './form-register.html',
   styleUrl: './form-register.css',
 })
 export class FormRegister {
-  // Objeto para enlazar con el formulario
   user = {
     username: '',
     password: '',
     email: '',
   };
-  // Inyectar HttpClient para hacer solicitudes HTTP crea las peticiones http cuando se carga el componente readonly es solo de lectura
-  constructor(private readonly http: HttpClient, private readonly router: Router) {}
+
+  // Objeto para almacenar errores del backend por campo
+  backendErrors = {
+    succes: '',
+    username: '',
+    password: '',
+    email: '',
+  }
+
+  constructor(
+    private readonly http: HttpClient,
+    private readonly router: Router,
+    private readonly AuthService: AuthService
+  ) {}
 
   register() {
-    interface User {
-      username: string;
-      password: string;
-      email: string;
-    }
+    // Limpiar errores previos
+    this.backendErrors = {
+      succes: '',
+      username: '',
+      password: '',
+      email: '',
+    };
 
-    interface RegisterResponse {
-      // Define el tipo de la respuesta segun lo que devuelva tu API (Luego ver si las cambiamos to-do a string)
-      [key: string]: any;
-    }
-
-    this.http
-      .post<RegisterResponse>('http://localhost:8080/api/user/register', this.user as User)
-      .subscribe({
-        next: (response: RegisterResponse) => {
-          console.log('Usuario registrado', response);
-          alert('Registro exitoso');
-          this.router.navigate(['/login']);
-        },
-        error: (error: any) => {
-          console.error('Error en el registro', error);
-          alert('Error en el registro');
-        },
-      });
+    this.AuthService.register(
+      this.user.username,
+      this.user.password,
+      this.user.email
+    ).subscribe({
+      next: (response) => {
+        // Si viene un mensaje de exito lo mostramos con el alert
+        if (response.succes) {
+          this.backendErrors.succes = response.succes;
+          console.log(this.backendErrors.succes);
+          alert(this.backendErrors.succes)
+          //  redirigir al login
+          this.router.navigate(['/login'])
+        } else {
+          // Si vienen errores por campo
+          // Los ... son para insertar los campos de un objeto en otro
+          this.backendErrors = { ...this.backendErrors, ...response };
+        }
+      },
+      error: (error) => {
+        // Si el backend devolvió 400 con errores por campo
+        if (error.status === 400 && error.error) {
+          this.backendErrors = { ...this.backendErrors, ...error.error };
+        } else {
+          // Por si se me escapa algo
+          console.error('Error inesperado:', error);
+        }
+      },
+    });
   }
+  
+
 }

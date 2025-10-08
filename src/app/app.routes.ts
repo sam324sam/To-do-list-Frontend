@@ -4,6 +4,9 @@ import { Routes } from '@angular/router';
 import { Home } from './home/home';
 import { FormRegister } from './form-register/form-register';
 import { FormLogin } from './form-login/form-login';
+import { AllList } from './all-list/all-list';
+// auth guard
+import { AuthGuard } from './guards/auth-guard';
 
 // Para usar las rutas en la aplicacion
 //  path: ruta de la aplicacion
@@ -17,5 +20,9 @@ export const routes: Routes = [
     },
     {
         path: 'login', component: (FormLogin)
+    },
+    {
+        // Ruta protegida
+        path: 'allList', component: (AllList), canActivate: [AuthGuard]
     }
 ];
