@@ -1,0 +1,71 @@
+<div class="form-container">
+  <div class="form-header">
+    <h2>¡Crea tu cuenta para comenzar!</h2>
+  </div>
+
+  <form (ngSubmit)="register()" #formulario="ngForm">
+    <div class="form-group">
+      <div class="label-title"><i class="fa-solid fa-user"></i><label for="username">Nombre de usuario</label></div>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        [(ngModel)]="user.username"
+        required
+        #username="ngModel"
+        placeholder="Ingresa tu nombre de usuario"
+      />
+      @if (username.invalid && username.touched) {
+      <div class="error">El nombre de usuario es requerido</div>
+      }
+    </div>
+
+    <div class="form-group">
+      <div class="label-title"><i class="fa-solid fa-envelope"></i><label for="email">Correo electrónico</label></div>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        [(ngModel)]="user.email"
+        required
+        email
+        #email="ngModel"
+        placeholder="correo@ejemplo.com"
+      />
+      @if (email.invalid && email.touched) {
+      <div class="error">
+        @if (email.errors?.['required']) {
+        <span>El email es requerido</span>
+        } @if (email.errors?.['email']) {
+        <span>Ingresa un email válido</span>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <div class="label-title"><i class="fa-solid fa-lock"></i><label for="password">Contraseña</label></div>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        [(ngModel)]="user.password"
+        required
+        minlength="6"
+        #password="ngModel"
+        placeholder="Mínimo 6 caracteres"
+      />
+      @if (password.invalid && password.touched) {
+      <div class="error">
+        @if (password.errors?.['required']) {
+        <span>La contraseña es requerida</span>
+        } @if (password.errors?.['minlength']) {
+        <span>Mínimo 6 caracteres</span>
+        }
+      </div>
+      }
+    </div>
+
+    <button type="submit" [disabled]="formulario.invalid" class="btn-submit">Registrar</button>
+  </form>
+</div>

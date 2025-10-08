@@ -1,0 +1,25 @@
+router-outlet{
+    width: 100vw;
+    height: 100vh;
+}
+
+app-form-register {
+    width: 100vw;
+    height: 100vh;
+}
+
+.container-app {
+  margin-left: var(--header-width);
+  min-height: 100vh;
+  background-color: var(--color-mint-green);
+  padding: 0; /* Sin padding, lo controla cada componente */
+  overflow-x: hidden; /* Evita scroll horizontal */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container-app {
+    margin-left: 0;
+    margin-bottom: 60px; /* Para header inferior en móvil */
+  }
+}
