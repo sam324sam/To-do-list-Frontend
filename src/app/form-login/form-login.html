@@ -13,6 +13,7 @@
         required
         #username="ngModel"
         placeholder="Ingresa tu nombre de usuario"
+        autocomplete="username"
       />
       @if (username.invalid && username.touched) {
       <div class="error">El nombre de usuario es requerido</div>
@@ -29,6 +30,7 @@
         required
         #password="ngModel"
         placeholder="Ingresa tu contraseña"
+        autocomplete="current-password"
       />
       @if (password.invalid && password.touched) {
       <div class="error">

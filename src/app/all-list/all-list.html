@@ -1,1 +1,66 @@
-<p>all-list works!</p>
+<div class="container">
+  <div class="header-container">
+    <h1>Tus listas</h1>
+    <span style="display: flex; gap: 0.5em; justify-content: center; align-items: center;">
+        <i class="fa-solid fa-magnifying-glass icon-search"></i>
+        <input placeholder="Buscar lista..." />
+    </span>
+  </div>
+
+  <div class="container-list">
+    @for (list of lists; track $index) {
+    <div class="cell-list" (click)="viewDetailsList(list.id)" (keydown)="viewDetailsList(list.id)">
+      <div class="name-list">{{ list.name }}</div>
+      <div class="owner-list">
+        Propietario: <span>{{ list.userName }}</span>
+      </div>
+      @if (list.userName == user.userName) {
+        <div style="display:flex; gap: 1em; margin-top: 10px;">
+            <i class="fa-solid fa-shield-halved"></i>
+            <i class="fa-solid fa-trash" (click)="deleteList(list.id)"></i>
+        </div>
+        
+      }@else {
+        <div style="display:flex; gap: 1em; margin-top: 10px;">
+        <i class="fa-solid fa-link"></i>
+    </div>
+      }
+    </div>
+    }
+  </div>
+
+  <!-- Botón/Formulario para agregar lista -->
+  <div class="add-list-container">
+    @if (!showAddForm) {
+    <div class="add-list" (click)="toggleAddForm()" (keydown.enter)="toggleAddForm()" tabindex="0">
+      <i class="fa-solid fa-plus"></i>
+      <span class="add-text">Crear nueva lista</span>
+    </div>
+    }@else {
+    <!-- Formulario desplegable -->
+    <div class="add-form">
+      <h3>Nueva Lista</h3>
+      <form (submit)="createList(newListName)">
+        <div class="form-group">
+          <label for="listName">Nombre de la lista</label>
+          <input
+            type="text"
+            id="listName"
+            [(ngModel)]="newListName"
+            name="listName"
+            placeholder="Ej: Lista de compras"
+            required
+            autofocus
+          />
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-cancel" (click)="cancelAdd()">Cancelar</button>
+          <button type="submit" class="btn-submit" [disabled]="!newListName.trim()">
+            Crear Lista
+          </button>
+        </div>
+      </form>
+    </div>
+    }
+  </div>
+</div>

@@ -5,7 +5,7 @@
         <a routerLink="/" title="Inicio"><img src="header/logo.png" alt="" /></a>
       </li>
       <li>
-        <a routerLink="/allList" title="Listas"><i class="fa-solid fa-list"></i></a>
+        <a routerLink="/all-list" title="Listas"><i class="fa-solid fa-list"></i></a>
       </li>
       <li>
         <a routerLink="/addList" title="Añadir lista"><i class="fa-solid fa-plus"></i></a>
@@ -15,7 +15,7 @@
     <ul>
       @if (isLoggedIn) {
       <li>
-        <a routerLink="/perfil" title="Perfil"><i class="fa-solid fa-user"></i></a>
+        <a routerLink="/perfil" title="{{ user.username}}"><i class="fa-solid fa-user"></i></a>
       </li>
       <li>
         <a (click)="logout()" title="Cerrar secion"

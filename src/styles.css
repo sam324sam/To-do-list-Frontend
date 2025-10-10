@@ -42,3 +42,7 @@ body {
   display: block;
   width: 100%;
 }
+
+h1 h2 p{
+  color: var(--color-delft-blue);
+}

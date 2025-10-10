@@ -21,6 +21,7 @@ export class Home implements OnInit, OnDestroy {
   // Para ver los cambios de is loged
   private subscription!: Subscription;
 
+  // Como el onmounted de vue
   ngOnInit(): void {
     // marcar a que observable va a vigilar el is logged de aut service
     this.subscription = this.authService.isLoggedIn$.subscribe((logged) => {

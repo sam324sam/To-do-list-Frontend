@@ -23,6 +23,6 @@ export const routes: Routes = [
     },
     {
         // Ruta protegida
-        path: 'allList', component: (AllList), canActivate: [AuthGuard]
+        path: 'all-list', component: (AllList), canActivate: [AuthGuard]
     }
 ];

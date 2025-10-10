@@ -18,6 +18,7 @@
         #username="ngModel"
         placeholder="Ingresa tu nombre de usuario"
         [class.backend-error-input]="backendErrors.username"
+        autocomplete="username"
       />
       @if (username.invalid && username.touched && !backendErrors.username) {
       <div class="error">El nombre de usuario es requerido</div>
@@ -42,6 +43,7 @@
         #email="ngModel"
         placeholder="correo@ejemplo.com"
         [class.backend-error-input]="backendErrors.email"
+        autocomplete="email"
       />
       @if (email.invalid && email.touched && !backendErrors.email) {
       <div class="error">
@@ -73,6 +75,7 @@
         #password="ngModel"
         placeholder="Mínimo 6 caracteres"
         [class.backend-error-input]="backendErrors.password"
+        autocomplete="current-password"
       />
       @if (password.invalid && password.touched && !backendErrors.password) {
       <div class="error">
