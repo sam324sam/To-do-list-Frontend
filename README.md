@@ -40,7 +40,7 @@ ng serve
 
 Haz click en la imagen para ver una breve demo del proyecto
 
-[![Ver demostración](./assestsGithub/App%20Demo.png)](./assestsGithub/App-Demo.mp4)
+[![Ver demostración](./assestsGithub/App%20Demo.png)]([./assestsGithub/App-Demo.mp4](https://drive.google.com/file/d/1j2ySVJ1DGbh6Oxe-PrPseJsmYUoNX1tA/view?usp=sharing))
 
 ## 👥 Autores
 
