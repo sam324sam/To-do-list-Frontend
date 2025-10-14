@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 // Componentes de la vista global
-import { Header } from "./header/header";
+import { Header } from "./components/header/header";
 
 @Component({
   selector: 'app-root',

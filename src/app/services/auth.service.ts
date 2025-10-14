@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 // para tokens npm install --save-dev @types/rxjs
 import { Observable, BehaviorSubject, tap } from 'rxjs';
 
+// Url de la api
+import { environment } from '../../environments/environment';
+
 // Para la respuesta del login
 interface UserLoginResponse {
   username: string;
@@ -15,7 +18,7 @@ interface UserLoginResponse {
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly apiUrl = 'http://localhost:8080/api/user';
+  private readonly apiUrl = environment.apiUrl + '/user';
   // Para guardar solo el estadso logico de la sesion (no el token) y variable reactiva que funciona como un remote event
   private readonly isLoggedInSubject = new BehaviorSubject<boolean>(this.hasToken());
 

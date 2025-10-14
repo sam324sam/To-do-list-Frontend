@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // Servicio
-import { ListService } from '../services/list.service';
+import { ListService } from '../../services/list.service';
 // formularios
 import { FormsModule } from '@angular/forms';
 

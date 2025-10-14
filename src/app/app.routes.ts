@@ -1,10 +1,10 @@
 // libreria de angular
 import { Routes } from '@angular/router';
 // compoenetes de la aplicacion
-import { Home } from './home/home';
-import { FormRegister } from './form-register/form-register';
-import { FormLogin } from './form-login/form-login';
-import { AllList } from './all-list/all-list';
+import { Home } from './components/home/home';
+import { FormRegister } from './components/form-register/form-register';
+import { FormLogin } from './components/form-login/form-login';
+import { AllList } from './components/all-list/all-list';
 // auth guard
 import { AuthGuard } from './guards/auth-guard';
 

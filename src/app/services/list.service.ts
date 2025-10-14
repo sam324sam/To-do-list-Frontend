@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+// Url de la api
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 // el backend se encarga de ver la sesion
 export class ListService {
-  private readonly apiUrl = 'http://localhost:8080/api/lists';
+  private readonly apiUrl = environment.apiUrl + '/lists';
 
   constructor(private readonly http: HttpClient) {}
 
