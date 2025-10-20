@@ -13,10 +13,12 @@ export class ListService {
 
   constructor(private readonly http: HttpClient) {}
 
+  // Obtener mis listas
   getMyLists(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/me`, { withCredentials: true });
   }
 
+  // Crear listas
   postList(newNameList: string): Observable<any> {
     return this.http.post<any>(
       `${this.apiUrl}/create`,
@@ -25,7 +27,24 @@ export class ListService {
     );
   }
 
+  // Eliminar listas
   deleteList(id: number): Observable<string> {
     return this.http.delete<any>(`${this.apiUrl}/delete/${id}`, { withCredentials: true });
+  }
+
+  // actualizar nombre de lista
+  updateListName(id: number, newName: string): Observable<any> {
+    return this.http.put<any>(
+      `${this.apiUrl}/update/${id}`,
+      { name: newName },
+      { withCredentials: true }
+    );
+  }
+
+  deleteShare(idList: number): Observable<string> {
+    return this.http.delete<any>(`${this.apiUrl}/share-me`, { 
+      body: idList,
+      withCredentials: true 
+    });
   }
 }

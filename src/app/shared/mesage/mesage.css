@@ -1,0 +1,18 @@
+.mesage {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 1em 1.5em;
+  border-radius: 0.5em;
+  color: white;
+  font-weight: 500;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  z-index: 9999;
+  opacity: 0.95;
+  transition: opacity 0.3s;
+}
+
+.mesage.ok { background-color: var(--color-ucla-blue); }
+.mesage.error { background-color: var(--color-poppy); }
+.mesage.info { background-color: var(--color-non-photo-blue); }
+.mesage:hover { opacity: 1; }

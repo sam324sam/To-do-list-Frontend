@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="header-list">
+    <span>
+      <button class="back-btn" (click)="goBack()">← Volver</button>
+      <h1>{{ list?.name }}</h1>
+      <p class="subtitle">
+        Creada por: <strong>{{ list?.userName }}</strong>
+      </p>
+    </span>
+    <div class="stat-card">
+      <span class="stat-number">{{ list?.taskDtos?.length || 0 }}</span>
+      <span class="stat-label">Total de tareas</span>
+    </div>
+  </div>
+  <div class="tasks-container">
+    <h2>Tareas</h2>
+    @for (task of list.taskDtos; track $index) {
+    <div class="task-card">
+      <div class="task-header">
+        <h3>{{ task.title }}</h3>
+        <span class="status-badge" [class]="'status-' + task.status.toLowerCase()">
+          {{ getStatusText(task.status) }}
+        </span>
+      </div>
+
+      <p class="task-description">{{ task.description }}</p>
+
+      <div class="task-meta">
+        <div class="meta-item">
+          <span class="meta-label">Fecha de creacion:</span>
+          <span class="meta-value">{{ formatDate(task.dueDate) }}</span>
+        </div>
+        @if (task.updatedAt) {
+        <div class="meta-item">
+          <span class="meta-label">Fecha de actualizacíon:</span>
+          <span class="meta-value">{{ formatDate(task.updatedAt) }}</span>
+        </div>
+        }
+        <div class="meta-item">
+          <span class="meta-label">Creado por:</span>
+          <span class="meta-value">{{ task.userName }}</span>
+        </div>
+      </div>
+      @if (task.tags && task.tags.length > 0) {
+      <div class="tags">
+        @for (tag of task.tags; track $index) {
+        <span class="tag">{{ tag }}</span>
+        }
+      </div>
+      }
+    </div>
+    } @if (!list?.taskDtos || list.taskDtos.length === 0) {
+    <div class="empty-state">
+      <p>📝 No hay tareas en esta lista</p>
+    </div>
+    }
+  </div>
+</div>

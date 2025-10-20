@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// Servicio
+// Servicios
 import { ListService } from '../../services/list.service';
+import { MesageService } from '../../services/mesage.service';
 // formularios
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-list',
@@ -15,6 +17,8 @@ import { FormsModule } from '@angular/forms';
 export class AllList implements OnInit {
   // Para guardar las listas
   lists: any[] = [];
+  // Para el buscador
+  filterLists: any[] = [];
   // Para mostrar un login despues
   loading: boolean = true;
   // para en caso de error
@@ -22,13 +26,21 @@ export class AllList implements OnInit {
   // Para el formulario del add
   showAddForm: boolean = false;
   newListName: string = '';
+  // Para el input editable
+  isEditing: boolean = false;
+  editListId: number | null = null;
+  editListName: string = '';
   // Usuario de sesion
   user = {
     userName: '',
     id: '',
   };
 
-  constructor(private readonly listService: ListService) {}
+  constructor(
+    private readonly listService: ListService,
+    private readonly router: Router,
+    private readonly mesageService: MesageService
+  ) {}
 
   // Llamar al service para la data luego sera con local storage en conjunto
   ngOnInit(): void {
@@ -43,6 +55,7 @@ export class AllList implements OnInit {
     this.listService.getMyLists().subscribe({
       next: (data) => {
         this.lists = data;
+        this.filterLists = data;
         this.loading = false;
         console.log(this.lists);
       },
@@ -53,9 +66,20 @@ export class AllList implements OnInit {
     });
   }
 
+  // Filtrar las listas
+  filter(searchTerm: string): void {
+    const lowerSearchTerm = searchTerm.toLowerCase();
+    this.filterLists = this.lists.filter((list) =>
+      list.name.toLowerCase().includes(lowerSearchTerm)
+    );
+  }
+
+  // Navegar a la vista detalle
   viewDetailsList(id: number): void {
-    console.log(id);
-    // redirigir luego
+    const selectedList = this.lists.find((list) => list.id === id);
+    if (selectedList) {
+      this.router.navigate(['/detal-list'], { state: { list: selectedList } });
+    }
   }
 
   // Para mostrar o ocultar formulario
@@ -66,37 +90,91 @@ export class AllList implements OnInit {
     }
   }
 
-  cancelAdd() {
-    this.toggleAddForm();
-  }
-
+  // Crear una nueva lista
   createList(newNameList: string): void {
     this.listService.postList(newNameList).subscribe({
-      next: (list) => {
-        alert('Lista creada');
-        // añadirla en el local para menos carga backend
-        console.log(list)
-        this.lists.push(list);
+      next: () => {
+        this.mesageService.showMesage('Lista creada con éxito', 'ok');
+        // recarga desde el backend
+        this.getListData();
+        // cerrar el formulario
+        this.toggleAddForm();
       },
       error: (error) => {
-        console.log(error.error)
-        alert('A ocurrido un error');
+        this.mesageService.showMesage('Ha ocurrido un error', 'error');
+        console.log(error.error);
       },
     });
   }
 
+  // Eliminar una lista
   deleteList(id: number): void {
     const confirmed = confirm('¿Seguro que quieres borrar esta lista?');
     if (!confirmed) return;
     this.listService.deleteList(id).subscribe({
       next: (response) => {
-        alert("Lista eliminada");
+        this.mesageService.showMesage('Lista eliminada', 'ok');
         // eliminar del local pa lo mismo
-        this.lists = this.lists.filter(list => list.id !== id);
+        this.lists = this.lists.filter((list) => list.id !== id);
+        this.filterLists = this.filterLists.filter((list) => list.id !== id);
       },
       error: (error) => {
-        console.log(error)
-        alert("Ocurrio un error");
+        console.log(error);
+        this.mesageService.showMesage('Ocurrio un error', 'error');
+      },
+    });
+  }
+
+  toggleEditForm(): void {
+    this.isEditing = !this.isEditing;
+    if (!this.isEditing) {
+      this.editListId = null;
+      this.editListName = '';
+    }
+  }
+
+  startEditing(id: number, currentName: string): void {
+    this.editListId = id;
+    this.editListName = currentName;
+    this.isEditing = true;
+  }
+
+  changeListName(editListName: string): void {
+    if (this.editListId === null) {
+      this.mesageService.showMesage('No hay lista seleccionada para editar.', 'error');
+      return;
+    }
+    const id = this.editListId;
+    this.listService.updateListName(id, editListName).subscribe({
+      next: () => {
+        this.mesageService.showMesage('Nombre de lista actualizado', 'ok');
+        // actualizar en el local para menos carga
+        const index = this.lists.findIndex((list) => list.id === id);
+        if (index !== -1) {
+          this.lists[index].name = editListName;
+          this.filterLists[index].name = editListName;
+          this.toggleEditForm();
+        }
+      },
+      error: (error) => {
+        console.log(error);
+        this.mesageService.showMesage('Ocurrio un error', 'error');
+      },
+    });
+  }
+
+  deleteShare(idList: number): void {
+    const confirmed = confirm('¿Seguro que quieres eliminar el acceso a esta lista?');
+    if (!confirmed) return;
+    this.listService.deleteShare(idList).subscribe({
+      next: (response) => {
+        this.mesageService.showMesage('Acceso a la lista eliminado', 'ok');
+        // eliminar del local pa lo mismo
+        this.lists = this.lists.filter((list) => list.id !== idList);
+      },
+      error: (error) => {
+        console.log(error);
+        this.mesageService.showMesage('Ocurrio un error', 'error');
       },
     });
   }

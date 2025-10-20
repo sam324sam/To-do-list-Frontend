@@ -1,0 +1,31 @@
+.error-container {
+  text-align: center;
+  padding: 5em 1em;
+  color: var(--color-delft-blue);
+}
+
+.error-container h1 {
+  font-size: 6em;
+  color: var(--color-poppy);
+  margin-bottom: 0.2em;
+}
+
+.error-container p {
+  font-size: 1.2em;
+  margin-bottom: 2em;
+}
+
+.back {
+  display: inline-block;
+  padding: 0.7em 1.5em;
+  background: var(--color-poppy);
+  color: white;
+  text-decoration: none;
+  border-radius: 0.5em;
+  transition: all 0.3s ease;
+}
+
+.back:hover {
+  cursor: pointer;
+  scale: 1.1;
+}

@@ -2,9 +2,16 @@
   <div class="form-header">
     <h2>Inicio de sesion</h2>
   </div>
+  @if (isLoadding) {
+  <div class="loading-container">
+    <div class="spinner"></div>
+  </div>
+  } @else {
   <form (ngSubmit)="login()" #formulario="ngForm">
     <div class="form-group">
-      <div class="label-title"><i class="fa-solid fa-user"></i><label for="username">Nombre de usuario</label></div>
+      <div class="label-title">
+        <i class="fa-solid fa-user"></i><label for="username">Nombre de usuario</label>
+      </div>
       <input
         type="text"
         id="username"
@@ -21,7 +28,9 @@
     </div>
 
     <div class="form-group">
-      <div class="label-title"><i class="fa-solid fa-lock"></i><label for="password">Contraseña</label></div>
+      <div class="label-title">
+        <i class="fa-solid fa-lock"></i><label for="password">Contraseña</label>
+      </div>
       <input
         type="password"
         id="password"
@@ -43,4 +52,5 @@
 
     <button type="submit" [disabled]="formulario.invalid" class="btn-submit">Iniciar sesion</button>
   </form>
+  }
 </div>

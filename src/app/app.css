@@ -15,11 +15,3 @@ app-form-register {
   padding: 0; /* Sin padding, lo controla cada componente */
   overflow-x: hidden; /* Evita scroll horizontal */
 }
-
-/* Responsive */
-@media (max-width: 768px) {
-  .container-app {
-    margin-left: 0;
-    margin-bottom: 60px; /* Para header inferior en móvil */
-  }
-}

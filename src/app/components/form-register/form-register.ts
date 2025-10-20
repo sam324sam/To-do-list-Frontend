@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
+// Servicios
+import { AuthService } from '../../services/auth.service';
+import { MesageService } from '../../services/mesage.service';
 
 @Component({
   selector: 'app-form-register',
@@ -25,11 +27,14 @@ export class FormRegister {
     password: '',
     email: '',
   }
-
+  // Para la carga
+  isLoadding: boolean = false;
+  
   constructor(
     private readonly http: HttpClient,
     private readonly router: Router,
-    private readonly AuthService: AuthService
+    private readonly AuthService: AuthService,
+    private readonly mesageService: MesageService
   ) {}
 
   register() {
@@ -40,7 +45,7 @@ export class FormRegister {
       password: '',
       email: '',
     };
-
+    this.isLoadding = true;
     this.AuthService.register(
       this.user.username,
       this.user.password,
@@ -51,7 +56,7 @@ export class FormRegister {
         if (response.succes) {
           this.backendErrors.succes = response.succes;
           console.log(this.backendErrors.succes);
-          alert(this.backendErrors.succes)
+          this.mesageService.showMesage(this.backendErrors.succes, 'ok');
           //  redirigir al login
           this.router.navigate(['/login'])
         } else {
@@ -59,6 +64,7 @@ export class FormRegister {
           // Los ... son para insertar los campos de un objeto en otro
           this.backendErrors = { ...this.backendErrors, ...response };
         }
+        this.isLoadding = false;
       },
       error: (error) => {
         // Si el backend devolvió 400 con errores por campo
@@ -66,8 +72,9 @@ export class FormRegister {
           this.backendErrors = { ...this.backendErrors, ...error.error };
         } else {
           // Por si se me escapa algo
-          console.error('Error inesperado:', error);
+          this.mesageService.showMesage('Error inesperado. Inténtalo de nuevo más tarde.', 'error');
         }
+        this.isLoadding = false;
       },
     });
   }

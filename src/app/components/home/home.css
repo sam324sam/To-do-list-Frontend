@@ -4,7 +4,7 @@
   margin: 6em auto 2em auto;
   border-radius: 2em;
   padding: 3em;
-  background-color: var(--color-mint-green);
+  background-color: white;
   box-shadow: 0 20px 60px rgba(29, 51, 84, 0.3), 0 0 0 1px rgba(29, 51, 84, 0.05);
   display: flex;
   justify-content: space-around;
@@ -218,8 +218,6 @@
   }
 }
 
-
-
 .second-container {
   display: flex;
   flex-direction: column;
@@ -228,6 +226,7 @@
   align-items: center;
   flex-wrap: wrap;
   padding: 1.5rem;
+  
 }
 
 .cell {
@@ -272,7 +271,7 @@
   margin: auto;
   border-radius: 2em;
   padding: 3em;
-  background-color: var(--color-mint-green);
+  background-color: white;
   box-shadow: 0 20px 60px rgba(29, 51, 84, 0.3), 0 0 0 1px rgba(29, 51, 84, 0.05);
   animation: containerFadeIn 0.8s ease-out;
 }
@@ -329,12 +328,13 @@
   margin-top: 1em;
 }
 
-.third-container .flex-row{
+.third-container .flex-row {
   margin-top: 1em;
 }
 
 /* Responsive */
 @media (max-width: 600px) {
+
   .second-container {
     flex-direction: column;
     gap: 1.5rem;
@@ -347,6 +347,11 @@
 }
 
 @media (max-width: 968px) {
+  .first-container {
+    display: flex;
+    flex-direction: column;
+  }
+
   .text-continer,
   .animate-list {
     width: 100%;

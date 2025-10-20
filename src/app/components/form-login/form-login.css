@@ -231,8 +231,7 @@ form {
 /* Responsive */
 @media (max-width: 600px) {
   .form-container {
-    max-width: 100%;
-    border-radius: 16px;
+    max-width: 90%;
   }
   
   .form-header {

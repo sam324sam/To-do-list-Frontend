@@ -55,6 +55,27 @@ export class AuthService {
     );
   }
 
+  checkSession(): void {
+    this.http
+      .get<UserLoginResponse>(`${this.apiUrl}/check-session`, { withCredentials: true })
+      .subscribe({
+        next: (response) => {
+          // Si el backend confirma la sesión, actualiza el localStorage
+          localStorage.setItem('username', response.username);
+          localStorage.setItem('id', response.id);
+          localStorage.setItem('token', '1');
+          this.isLoggedInSubject.next(true);
+        },
+        error: () => {
+          // Si no hay sesión en el backend, borra el localStorage
+          localStorage.removeItem('username');
+          localStorage.removeItem('id');
+          localStorage.removeItem('token');
+          this.isLoggedInSubject.next(false);
+        },
+      });
+  }
+
   // Desloguear en el frontend y en el backend
   logout(): void {
     // Borrar datos de sesión

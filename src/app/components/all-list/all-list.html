@@ -1,29 +1,83 @@
 <div class="container">
   <div class="header-container">
     <h1>Tus listas</h1>
-    <span style="display: flex; gap: 0.5em; justify-content: center; align-items: center;">
-        <i class="fa-solid fa-magnifying-glass icon-search"></i>
-        <input placeholder="Buscar lista..." />
+    <span style="display: flex; gap: 0.5em; justify-content: center; align-items: center">
+      <i class="fa-solid fa-magnifying-glass icon-search"></i>
+      <input placeholder="Buscar lista..." (input)="filter($event.target.value)" />
     </span>
   </div>
 
+  @if (loading) {
+  <div class="loading-container">
+    <div class="spinner"></div> 
+  </div>
+  } @else {
+
   <div class="container-list">
-    @for (list of lists; track $index) {
-    <div class="cell-list" (click)="viewDetailsList(list.id)" (keydown)="viewDetailsList(list.id)">
-      <div class="name-list">{{ list.name }}</div>
+    @for (list of filterLists; track $index) {
+    <div class="cell-list">
+      <!-- El id es para que sepa cual activar-->
+      @if (!isEditing || editListId !== list.id) {
+      <div class="name-list">
+        <h3 (click)="viewDetailsList(list.id)" (keydown)="viewDetailsList(list.id)">
+          {{ list.name }}
+        </h3>
+        @if (list.userName == user.userName) {
+        <i
+          class="fa-solid fa-pencil"
+          style="font-size: 0.7em"
+          (click)="startEditing(list.id, list.name)"
+          (keydown.enter)="startEditing(list.id, list.name)"
+          title="Editar nombre de la lista"
+        ></i>
+        }
+      </div>
+      }@else if (isEditing && editListId === list.id) {
+      <form (submit)="changeListName(editListName)" class="form-name-edit">
+        <input
+          type="text"
+          [(ngModel)]="editListName"
+          name="editListName"
+          required
+          autofocus
+          (click)="$event.stopPropagation()"
+          (keydown)="$event.stopPropagation()"
+        />
+        <div class="edits-button">
+          <button type="button" (click)="toggleEditForm()" (keydown.enter)="toggleEditForm()">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+
+          <button type="submit" [disabled]="!editListName.trim()">
+            <i class="fa-solid fa-check"></i>
+          </button>
+        </div>
+      </form>
+      }
       <div class="owner-list">
         Propietario: <span>{{ list.userName }}</span>
       </div>
       @if (list.userName == user.userName) {
-        <div style="display:flex; gap: 1em; margin-top: 10px;">
-            <i class="fa-solid fa-shield-halved"></i>
-            <i class="fa-solid fa-trash" (click)="deleteList(list.id)"></i>
-        </div>
-        
+      <div style="display: flex; gap: 1em; margin-top: 10px">
+        <i class="fa-solid fa-shield-halved" title="Adminstrador"></i>
+        <i
+          class="fa-solid fa-trash"
+          (click)="deleteList(list.id)"
+          (keydown.enter)="deleteList(list.id)"
+          title="Eliminar lista"
+        ></i>
+      </div>
+
       }@else {
-        <div style="display:flex; gap: 1em; margin-top: 10px;">
-        <i class="fa-solid fa-link"></i>
-    </div>
+      <div style="display: flex; gap: 1em; margin-top: 10px">
+        <i class="fa-solid fa-link" title="Lissta compartida"></i>
+        <i
+          class="fa-solid fa-link-slash"
+          (click)="deleteShare(list.id)"
+          (keydown.enter)="deleteShare(list.id)"
+          title="Dejar de compartir"
+        ></i>
+      </div>
       }
     </div>
     }
@@ -54,7 +108,7 @@
           />
         </div>
         <div class="form-actions">
-          <button type="button" class="btn-cancel" (click)="cancelAdd()">Cancelar</button>
+          <button type="button" class="btn-cancel" (click)="toggleAddForm()">Cancelar</button>
           <button type="submit" class="btn-submit" [disabled]="!newListName.trim()">
             Crear Lista
           </button>
@@ -63,4 +117,5 @@
     </div>
     }
   </div>
+  }
 </div>
