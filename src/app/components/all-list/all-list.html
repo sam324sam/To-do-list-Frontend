@@ -7,15 +7,21 @@
     </span>
   </div>
 
-  @if (loading) {
+  @if (loadingListGet) {
   <div class="loading-container">
-    <div class="spinner"></div> 
+    <div class="spinner"></div>
   </div>
   } @else {
-
   <div class="container-list">
+    <!--Generar la data de las listas-->
     @for (list of filterLists; track $index) {
     <div class="cell-list">
+      <!-- animacion de carga para las acciones de editar y borrar -->
+      @if (editListId == list.id && (loadingListUpdate || loadingListDelete)) {
+      <div class="loading-container">
+        <div class="spinner"></div>
+      </div>
+      }@else {
       <!-- El id es para que sepa cual activar-->
       @if (!isEditing || editListId !== list.id) {
       <div class="name-list">
@@ -47,7 +53,6 @@
           <button type="button" (click)="toggleEditForm()" (keydown.enter)="toggleEditForm()">
             <i class="fa-solid fa-xmark"></i>
           </button>
-
           <button type="submit" [disabled]="!editListName.trim()">
             <i class="fa-solid fa-check"></i>
           </button>
@@ -78,7 +83,7 @@
           title="Dejar de compartir"
         ></i>
       </div>
-      }
+      } }
     </div>
     }
   </div>
@@ -89,6 +94,10 @@
     <div class="add-list" (click)="toggleAddForm()" (keydown.enter)="toggleAddForm()" tabindex="0">
       <i class="fa-solid fa-plus"></i>
       <span class="add-text">Crear nueva lista</span>
+    </div>
+    }@else { @if (loadingListPost) {
+    <div class="loading-container">
+      <div class="spinner"></div>
     </div>
     }@else {
     <!-- Formulario desplegable -->
@@ -115,7 +124,7 @@
         </div>
       </form>
     </div>
-    }
+    } }
   </div>
   }
 </div>

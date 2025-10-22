@@ -196,6 +196,170 @@ h1 {
   font-size: 18px;
 }
 
+/*Formulario de añadir tarea*/
+/* Botón para agregar lista */
+.add-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8em;
+  min-height: 150px;
+  border: 3px dashed var(--color-non-photo-blue);
+  border-radius: 1.2em;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Icono y texto del botón */
+.add-icon {
+  font-size: 4em;
+  color: var(--color-non-photo-blue);
+  transition: all 0.3s ease;
+  line-height: 1;
+}
+
+.add-text {
+  font-size: 1.2em;
+  color: var(--color-non-photo-blue);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+/* Hover del botón */
+.add-list:hover {
+  background: white;
+  border-color: var(--color-delft-blue);
+  transform: scale(1.02);
+}
+
+.add-list:hover .add-icon {
+  color: var(--color-delft-blue);
+  transform: rotate(90deg);
+}
+
+.add-list:hover .add-text {
+  color: var(--color-delft-blue);
+}
+
+.add-list:focus {
+  outline: 3px solid var(--color-ucla-blue);
+  outline-offset: 2px;
+}
+
+/* Formulario desplegable */
+.add-form {
+  background: white;
+  border-radius: 1.2em;
+  padding: 2em;
+  border: 3px solid var(--color-ucla-blue);
+  box-shadow: 0 8px 24px rgba(29, 51, 84, 0.15);
+  animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.add-form h3 {
+  color: var(--color-delft-blue);
+  font-size: 1.8em;
+  margin: 0 0 1.5em 0;
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 1.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1em;
+}
+
+.form-group label {
+  display: block;
+  color: var(--color-delft-blue);
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  font-size: 1em;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.9em 1.2em;
+  border: 2px solid var(--color-non-photo-blue);
+  border-radius: 0.8em;
+  font-size: 1em;
+  color: var(--color-delft-blue);
+  transition: all 0.3s ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  border-color: var(--color-ucla-blue);
+  box-shadow: 0 0 0 3px rgba(70, 117, 153, 0.1);
+}
+
+.form-group input::placeholder {
+  color: var(--color-non-photo-blue);
+}
+
+.form-actions {
+  display: flex;
+  gap: 1em;
+  justify-content: flex-end;
+}
+
+.form-actions button {
+  padding: 0.8em 2em;
+  border-radius: 0.8em;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  outline: none;
+}
+
+.btn-cancel {
+  background-color: var(--color-poppy);
+  color: white;
+  border: 2px solid var(--color-non-photo-blue);
+}
+
+.btn-cancel:hover {
+  transform: translateY(-2px);
+}
+
+.btn-submit {
+  background: var(--color-delft-blue);
+  color: white;
+  box-shadow: 0 4px 12px rgba(70, 117, 153, 0.3);
+}
+
+.btn-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(70, 117, 153, 0.4);
+}
+
+.btn-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 15px;

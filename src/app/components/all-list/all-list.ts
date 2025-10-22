@@ -20,7 +20,10 @@ export class AllList implements OnInit {
   // Para el buscador
   filterLists: any[] = [];
   // Para mostrar un login despues
-  loading: boolean = true;
+  loadingListGet: boolean = true;
+  loadingListPost: boolean = false;
+  loadingListDelete: boolean = false;
+  loadingListUpdate: boolean = false;
   // para en caso de error
   error: string = '';
   // Para el formulario del add
@@ -56,12 +59,12 @@ export class AllList implements OnInit {
       next: (data) => {
         this.lists = data;
         this.filterLists = data;
-        this.loading = false;
+        this.loadingListGet = false;
         console.log(this.lists);
       },
       error: (error) => {
         this.error = error.error;
-        this.loading = false;
+        this.loadingListGet = false;
       },
     });
   }
@@ -92,17 +95,20 @@ export class AllList implements OnInit {
 
   // Crear una nueva lista
   createList(newNameList: string): void {
+    this.loadingListPost = true;
     this.listService.postList(newNameList).subscribe({
       next: () => {
         this.mesageService.showMesage('Lista creada con éxito', 'ok');
         // recarga desde el backend
         this.getListData();
+        this.loadingListPost = false;
         // cerrar el formulario
         this.toggleAddForm();
       },
       error: (error) => {
         this.mesageService.showMesage('Ha ocurrido un error', 'error');
         console.log(error.error);
+        this.loadingListPost = false;
       },
     });
   }
@@ -111,16 +117,19 @@ export class AllList implements OnInit {
   deleteList(id: number): void {
     const confirmed = confirm('¿Seguro que quieres borrar esta lista?');
     if (!confirmed) return;
+    this.loadingListDelete = true;
     this.listService.deleteList(id).subscribe({
       next: (response) => {
         this.mesageService.showMesage('Lista eliminada', 'ok');
         // eliminar del local pa lo mismo
         this.lists = this.lists.filter((list) => list.id !== id);
         this.filterLists = this.filterLists.filter((list) => list.id !== id);
+        this.loadingListDelete = false;
       },
       error: (error) => {
         console.log(error);
         this.mesageService.showMesage('Ocurrio un error', 'error');
+        this.loadingListDelete = false;
       },
     });
   }
@@ -145,6 +154,7 @@ export class AllList implements OnInit {
       return;
     }
     const id = this.editListId;
+    this.loadingListUpdate = true;
     this.listService.updateListName(id, editListName).subscribe({
       next: () => {
         this.mesageService.showMesage('Nombre de lista actualizado', 'ok');
@@ -155,10 +165,12 @@ export class AllList implements OnInit {
           this.filterLists[index].name = editListName;
           this.toggleEditForm();
         }
+        this.loadingListUpdate = false;
       },
       error: (error) => {
         console.log(error);
         this.mesageService.showMesage('Ocurrio un error', 'error');
+        this.loadingListUpdate = false;
       },
     });
   }
@@ -166,15 +178,19 @@ export class AllList implements OnInit {
   deleteShare(idList: number): void {
     const confirmed = confirm('¿Seguro que quieres eliminar el acceso a esta lista?');
     if (!confirmed) return;
+    this.loadingListDelete = true;
     this.listService.deleteShare(idList).subscribe({
       next: (response) => {
         this.mesageService.showMesage('Acceso a la lista eliminado', 'ok');
         // eliminar del local pa lo mismo
         this.lists = this.lists.filter((list) => list.id !== idList);
+        this.filterLists = this.filterLists.filter((list) => list.id !== idList);
+        this.loadingListDelete = false;
       },
       error: (error) => {
         console.log(error);
         this.mesageService.showMesage('Ocurrio un error', 'error');
+        this.loadingListDelete = false;
       },
     });
   }

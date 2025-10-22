@@ -12,7 +12,7 @@
   transition: opacity 0.3s;
 }
 
-.mesage.ok { background-color: var(--color-ucla-blue); }
+.mesage.ok { background-color: rgb(96, 214, 96); }
 .mesage.error { background-color: var(--color-poppy); }
-.mesage.info { background-color: var(--color-non-photo-blue); }
+.mesage.info { background-color: var(--color-ucla-blue); }
 .mesage:hover { opacity: 1; }
