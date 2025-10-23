@@ -1,0 +1,163 @@
+.container {
+  width: 90%;
+  max-width: 1700px;
+  margin: 1.5em auto 2em auto;
+  border-radius: 2em;
+  padding: 3em;
+  background: white;
+  box-shadow: 0 20px 60px rgba(29, 51, 84, 0.3), 0 0 0 1px rgba(29, 51, 84, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+  animation: containerFadeIn 0.8s ease-out;
+}
+
+@keyframes containerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header */
+.header-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2em;
+  flex-wrap: wrap;
+}
+
+.header-container h1 {
+  color: var(--color-delft-blue);
+  font-size: 2.5em;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.header-container input {
+  padding: 0.8em 1.5em;
+  border: 2px solid var(--color-poppy);
+  border-radius: 2em;
+  font-size: 1em;
+  background-color: white;
+  color: var(--color-delft-blue);
+  transition: all 0.3s ease;
+  outline: none;
+  min-width: 280px;
+}
+
+.icon-search {
+  color: var(--color-poppy);
+}
+
+.header-container span:focus-within input{
+  color: var(--color-ucla-blue);
+  transform: translateY(-2px);
+  transition: 0.3s ease;
+  border-color: var(--color-ucla-blue);
+}
+
+.header-container span:focus-within .icon-search {
+  color: var(--color-ucla-blue);
+  transform: translateY(-2px);
+  transition: 0.3s ease;
+}
+
+/* Placeholder normal */
+.header-container input::placeholder {
+  color: var(--color-poppy);
+  opacity: 0.7;
+  transition: color 0.3s ease;
+}
+
+/* Placeholder cuando el input tiene focus */
+.header-container input:focus::placeholder {
+  color: var(--color-ucla-blue);
+  opacity: 0.6;
+}
+
+/* Container de listas */
+.container-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2em;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    margin: auto;
+    gap: 2em;
+  }
+
+  .header-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5em;
+  }
+
+  .header-container h1 {
+    font-size: 2em;
+    text-align: center;
+  }
+
+  .header-container input {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .container-list {
+    grid-template-columns: 1fr;
+    gap: 1.5em;
+  }
+
+  .add-list {
+    min-height: 120px;
+  }
+
+  .add-form {
+    padding: 1.5em;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .form-actions button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    border-radius: 1.5em;
+    padding: 1.5em;
+  }
+
+  .header-container h1 {
+    font-size: 1.8em;
+  }
+
+  .cell-list {
+    padding: 1.2em;
+  }
+
+  .name-list {
+    font-size: 1.2em;
+  }
+
+  .add-icon {
+    font-size: 3em;
+  }
+
+  .add-text {
+    font-size: 1em;
+  }
+}

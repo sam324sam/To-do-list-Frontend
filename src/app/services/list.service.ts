@@ -4,10 +4,10 @@ import { Observable } from 'rxjs';
 // Url de la api
 import { environment } from '../../environments/environment';
 
+// el backend se encarga de ver la sesion
 @Injectable({
   providedIn: 'root',
 })
-// el backend se encarga de ver la sesion
 export class ListService {
   private readonly apiUrl = environment.apiUrl + '/lists';
 

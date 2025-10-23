@@ -1,0 +1,115 @@
+.container {
+  width: 90%;
+  max-width: 1700px;
+  margin: 1.5em auto 2em auto;
+  border-radius: 2em;
+  padding: 3em;
+  background: white;
+  box-shadow: 0 20px 60px rgba(29, 51, 84, 0.3), 0 0 0 1px rgba(29, 51, 84, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 2.5em;
+  animation: containerFadeIn 0.8s ease-out;
+}
+
+@keyframes containerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.1em;
+}
+
+.back-btn {
+  background: var(--color-poppy);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 15px;
+  transition: background 0.2s;
+  transition: all 0.2s ease-in-out;
+}
+
+.back-btn:hover {
+  scale: 1.05;
+}
+
+h1 {
+  margin: 0 0 10px 0;
+  color: #2c3e50;
+  font-size: 32px;
+}
+
+.subtitle {
+  color: #7f8c8d;
+  margin: 0;
+}
+
+.stat-card {
+  background-color: var(--color-poppy);
+  padding: 1.1em;
+  border-radius: 1em;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.stat-card:hover {
+  scale: 1.1;
+}
+
+.stat-number {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.stat-label {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.tasks-container h2 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #95a5a6;
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .task-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .status-badge {
+    margin-left: 0;
+  }
+}

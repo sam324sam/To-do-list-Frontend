@@ -1,30 +1,31 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RouterLink, Router} from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
-
-// EL On pipipi es una interfaz
 export class Header implements OnInit, OnDestroy {
   isLoggedIn = false;
+  menuOpen = false;
   user = {
     username: '',
     id: '',
   };
 
-  constructor(private readonly authService: AuthService, private readonly router: Router) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly router: Router
+  ) {}
 
-  // Para ver los cambios de is loged
   private subscription!: Subscription;
 
   ngOnInit(): void {
-    // marcar a que observable va a vigilar el is logged de aut service
     this.subscription = this.authService.isLoggedIn$.subscribe((logged) => {
       this.isLoggedIn = logged;
       if (logged) {
@@ -37,13 +38,20 @@ export class Header implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // Limpiar la suscripción al destruir el componente
     this.subscription?.unsubscribe();
   }
 
-  // Boton de quitar la sesion
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu() {
+    this.menuOpen = false;
+  }
+
   logout() {
     this.authService.logout();
+    this.closeMenu();
     this.router.navigate(['']);
   }
 }

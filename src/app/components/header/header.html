@@ -1,32 +1,54 @@
 <header>
-  <aside>
+  <div class="header-content">
+    <a routerLink="/" class="logo-link" title="Inicio">
+      <img src="header/logo.png" alt="Logo" class="header-logo" />
+    </a>
+    
+    <button class="menu-toggle" (click)="toggleMenu()" [class.active]="menuOpen">
+      <i class="fa-solid" [ngClass]="menuOpen ? 'fa-times' : 'fa-bars'"></i>
+    </button>
+  </div>
+  
+  <aside [class.open]="menuOpen">
     <ul>
-      <li>
-        <a routerLink="/" title="Inicio"><img src="header/logo.png" alt="" /></a>
+      <li class="mobile-hidden">
+        <a routerLink="/" title="Inicio" (click)="closeMenu()">
+          <img src="header/logo.png" alt="Logo" />
+        </a>
       </li>
       <li>
-        <a routerLink="/all-list" title="Listas"><i class="fa-solid fa-list"></i></a>
+        <a routerLink="/all-list" title="Listas" (click)="closeMenu()">
+          <i class="fa-solid fa-list"></i>
+        </a>
       </li>
       <li>
-        <a routerLink="/addList" title="Añadir lista"><i class="fa-solid fa-plus"></i></a>
+        <a routerLink="/addList" title="Añadir lista" (click)="closeMenu()">
+          <i class="fa-solid fa-plus"></i>
+        </a>
       </li>
     </ul>
 
     <ul>
       @if (isLoggedIn) {
       <li>
-        <a routerLink="/perfil" title="{{ user.username}}"><i class="fa-solid fa-user"></i></a>
+        <a routerLink="/perfil" title="{{ user.username}}" (click)="closeMenu()">
+          <i class="fa-solid fa-user"></i>
+        </a>
       </li>
       <li>
-        <a (click)="logout()" title="Cerrar secion"
-          ><i class="fa-solid fa-right-from-bracket"></i
-        ></a>
+        <a (click)="logout()" title="Cerrar sesión">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </a>
       </li>
       }@else {
       <li>
-        <a routerLink="/login" title="Perfil"><i class="fa-solid fa-user"></i></a>
+        <a routerLink="/login" title="Perfil" (click)="closeMenu()">
+          <i class="fa-solid fa-user"></i>
+        </a>
       </li>
       }
     </ul>
   </aside>
+  
+  <div class="overlay" [class.show]="menuOpen" (click)="closeMenu()" (keydown.escape)="closeMenu()"></div>
 </header>

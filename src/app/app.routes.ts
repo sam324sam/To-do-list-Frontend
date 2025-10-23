@@ -1,12 +1,12 @@
 // libreria de angular
 import { Routes } from '@angular/router';
 // compoenetes de la aplicacion
-import { Home } from './components/home/home';
-import { FormRegister } from './components/form-register/form-register';
-import { FormLogin } from './components/form-login/form-login';
-import { AllList } from './components/all-list/all-list';
-import { DetalList } from './components/detal-list/detal-list';
-import { ErrorPage } from './components/error-page/error-page';
+import { Home } from './pages/home/home';
+import { FormRegister } from './pages/form-register/form-register';
+import { FormLogin } from './pages/form-login/form-login';
+import { AllList } from './pages/all-list/all-list';
+import { DetalList } from './pages/detal-list/detal-list';
+import { ErrorPage } from './pages/error-page/error-page';
 // auth guard
 import { AuthGuard } from './guards/auth-guard';
 

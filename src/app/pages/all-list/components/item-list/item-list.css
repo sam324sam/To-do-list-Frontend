@@ -1,0 +1,200 @@
+/* Tarjetas de lista */
+.cell-list {
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 1.2em;
+  padding: 1.4em;
+  border: 3px solid var(--color-non-photo-blue);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.cell-list::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-ucla-blue), var(--color-non-photo-blue));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.cell-list:hover::before {
+  transform: scaleX(1);
+}
+
+.cell-list:hover {
+  transform: translateY(-8px);
+  border-color: var(--color-ucla-blue);
+  box-shadow: 0 12px 24px rgba(29, 51, 84, 0.15);
+}
+
+.cell-list:active {
+  transform: translateY(-4px);
+}
+
+.name-list {
+  font-size: 1.4em;
+  font-weight: 600;
+  color: var(--color-delft-blue);
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+  word-break: break-word;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.2em;
+  transition: all 0.3s ease;
+  animation: formEditSlideIn 0.3s ease-out;
+  height: 100%;
+}
+
+.name-list h3 {
+  transition: all 0.3s ease;
+  width: 100%;
+  height: 100%;
+}
+
+.name-list h3:hover {
+  cursor: pointer;
+  color: var(--color-poppy);
+}
+
+.form-name-edit {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.8em;
+  width: 100%;
+  transition: all 0.3s ease;
+  animation: formEditSlideIn 0.3s ease-out;
+}
+
+.form-name-edit input {
+  font-size: 1.4em;
+  font-weight: 600;
+  color: var(--color-delft-blue);
+  padding: 0.4em 0.8em;
+  border: 0;
+  border-bottom: 2px solid var(--color-non-photo-blue);
+  outline: none;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.9);
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+  text-overflow: clip;
+}
+
+.form-name-edit input:focus {
+  border-color: var(--color-ucla-blue);
+  box-shadow: 0 0 0 3px rgba(70, 117, 153, 0.15);
+  background: white;
+  border-radius: 0.7em;
+}
+
+.edits-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.6em;
+}
+
+.edits-button button {
+  padding: 0.5em 0.8em;
+  border-radius: 0.6em;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+}
+
+.edits-button button:first-child {
+  border: 2px solid var(--color-poppy);
+}
+
+.edits-button button:first-child:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+
+.edits-button button:last-child {
+  border: 2px solid rgb(115, 221, 115);
+  color: var(--color-non-photo-blue) !important;
+}
+
+.edits-button button:last-child:hover:not(:disabled) {
+  transform: scale(1.05);
+  color: var(--color-delft-blue);
+}
+
+.edits-button button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.edits-button button i {
+  font-size: 1em;
+  pointer-events: none;
+}
+
+/* Animación de entrada del formulario */
+@keyframes formEditSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive para el formulario de edición */
+@media (max-width: 480px) {
+  .form-name-edit input {
+    font-size: 1.2em;
+  }
+
+  .edits-button button {
+    min-width: 32px;
+    height: 32px;
+    padding: 0.4em 0.7em;
+  }
+}
+
+.owner-list {
+  font-size: 0.85em;
+  color: var(--color-ucla-blue);
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.owner-list span {
+  font-weight: 600;
+  color: var(--color-delft-blue);
+}
+
+/* Iconos de las celldas de lista */
+.cell-list i {
+  color: var(--color-non-photo-blue);
+  transition: color 0.3s ease;
+}
+
+.cell-list:hover i {
+  color: var(--color-ucla-blue);
+}

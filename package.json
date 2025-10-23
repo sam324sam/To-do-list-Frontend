@@ -2,7 +2,7 @@
   "name": "to-do-list-frontend",
   "version": "0.0.0",
   "scripts": {
-    "deploy": "ng build --configuration production --base-href 'https://sam324sam.github.io/To-do-list-Frontend/' && npx angular-cli-ghpages --dir=dist/To-do-list-Frontend/browser/ --repo=https://github.com/sam324sam/To-do-list-Frontend.git",
+    "deploy": "ng build --configuration production && npx angular-cli-ghpages --dir=dist/To-do-list-Frontend/browser/ --repo=https://github.com/sam324sam/To-do-list-Frontend.git",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
@@ -38,6 +38,7 @@
     "@angular/cli": "^20.2.1",
     "@angular/compiler-cli": "^20.2.0",
     "@types/jasmine": "~5.1.0",
+    "angular-cli-ghpages": "^2.0.3",
     "jasmine-core": "~5.9.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

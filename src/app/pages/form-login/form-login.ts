@@ -29,6 +29,7 @@ export class FormLogin {
       [key: string]: any;
     }
     this.isLoadding = true;
+    this.mesageService.showMesage('Este proceso puede tardar un poco si el servidor se inicia por primera vez', 'info');
     // Llamar al servicio de auntetificacion
     this.authService.login(this.user.username, this.user.password).subscribe({
       next: (response: LoginResponse) => {

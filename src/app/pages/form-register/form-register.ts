@@ -46,6 +46,7 @@ export class FormRegister {
       email: '',
     };
     this.isLoadding = true;
+    this.mesageService.showMesage('Este proceso puede tardar un poco si el servidor se inicia por primera vez', 'info');
     this.AuthService.register(
       this.user.username,
       this.user.password,

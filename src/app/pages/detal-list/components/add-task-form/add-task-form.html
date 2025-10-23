@@ -1,0 +1,53 @@
+@if (!showAddForm) {
+    <div class="add-list" (click)="toggleAddForm()" (keydown.enter)="toggleAddForm()">
+      <i class="fa-solid fa-plus"></i>
+      <span class="add-text">Crear nueva tarea</span>
+    </div>
+    }@else { @if (loadingTaskPost) {
+    <div class="loading-container">
+      <div class="spinner"></div>
+    </div>
+    }@else {
+    <!-- Formulario desplegable -->
+    <div class="add-form">
+      <h3>Nueva Lista</h3>
+      <form (submit)="buttonCreateTask()">
+        <div class="form-group">
+          <label for="taskTitle">Titulo de la tarea</label>
+          <input
+            type="text"
+            id="taskTitle"
+            [(ngModel)]="newTask.title"
+            name="taskTitle"
+            placeholder="Ej: Compara mañana"
+            required
+            autofocus
+          />
+          <label for="taskDescription">Descripcíon de la tarea</label>
+          <input
+            type="text"
+            id="taskDescription"
+            [(ngModel)]="newTask.description"
+            name="taskDescription"
+            placeholder="Ej: Comprar pan, leche y huevos"
+            required
+            autofocus
+          />
+          <label for="dueDate">Fecha para la finalizacion de la tarea</label>
+          <input
+            type="date"
+            id="dueDate"
+            [(ngModel)]="newTask.dueDate"
+            name="dueDate"
+            [defaultValue]="formatDate"
+            required
+            autofocus
+          />
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-cancel" (click)="toggleAddForm()">Cancelar</button>
+          <button type="submit" class="btn-submit">Crear Tarea</button>
+        </div>
+      </form>
+    </div>
+    } }

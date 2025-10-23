@@ -1,0 +1,34 @@
+<!-- Botón/Formulario para agregar lista -->
+@if (!showAddForm) {
+<div class="add-list" (click)="toggleAddForm()" (keydown.enter)="toggleAddForm()">
+  <i class="fa-solid fa-plus"></i>
+  <span class="add-text">Crear nueva lista</span>
+</div>
+}@else { @if (loadingListPost) {
+<div class="loading-container">
+  <div class="spinner"></div>
+</div>
+}@else {
+<!-- Formulario desplegable -->
+<div class="add-form">
+  <h3>Nueva Lista</h3>
+  <form (submit)="buttonCreateList(newListName)">
+    <div class="form-group">
+      <label for="listName">Nombre de la lista</label>
+      <input
+        type="text"
+        id="listName"
+        [(ngModel)]="newListName"
+        name="listName"
+        placeholder="Ej: Lista de compras"
+        required
+        autofocus
+      />
+    </div>
+    <div class="form-actions">
+      <button type="button" class="btn-cancel" (click)="toggleAddForm()">Cancelar</button>
+      <button type="submit" class="btn-submit" [disabled]="!newListName.trim()">Crear Lista</button>
+    </div>
+  </form>
+</div>
+} }
