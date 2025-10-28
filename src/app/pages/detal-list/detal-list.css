@@ -58,15 +58,28 @@ h1 {
   margin: 0;
 }
 
-.stat-card {
+.info-list{
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  align-items: center;
+}
+
+.shared-icon{
+  font-size: 2em;
+}
+
+.stat-card , .shared-icon{
   background-color: var(--color-poppy);
   padding: 1.1em;
   border-radius: 1em;
   color: white;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
   transition: all 0.2s ease-in-out;
+  gap: 0.2em;
 }
 
 .stat-card:hover {
@@ -83,8 +96,8 @@ h1 {
   opacity: 0.9;
 }
 
-.tasks-container h2 {
-  color: #2c3e50;
+.list-body h2 {
+  color: var(--color-delft-blue);
   margin-bottom: 20px;
 }
 
@@ -93,6 +106,24 @@ h1 {
   padding: 60px 20px;
   color: #95a5a6;
   font-size: 18px;
+}
+
+/*Tareas celdas y contenedores*/
+.tasks-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5em;
+  justify-content: center;
+  align-items: start;
+  margin: 0 auto;
+}
+
+.cell-task {
+  flex: 1 1 calc(50% - 1.5em);
+  min-width: 20em;
+  min-height: 100%;
+  height: 100%;
 }
 
 @media (max-width: 768px) {
@@ -107,6 +138,10 @@ h1 {
   .task-header {
     flex-direction: column;
     gap: 10px;
+  }
+
+  .cell-task {
+    flex: 1 1 100%;
   }
 
   .status-badge {

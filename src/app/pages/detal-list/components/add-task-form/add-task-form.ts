@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 // Modelos
-import { CreateTask } from '../../../../models/createTask.model';
+import { CreateTask } from '../../../../models/Task/createTask.model';
 // Formularios reactivos
 import { FormsModule } from '@angular/forms';
 
@@ -12,16 +12,22 @@ import { FormsModule } from '@angular/forms';
 })
 export class AddTaskForm {
   // Variables del padre
-  @Input() 
-  @Input() loadingTaskPost: boolean = false;
+  @Input()
+  @Input()
+  loadingTaskPost: boolean = false;
   // Metodos del padre
   @Output() createTask = new EventEmitter<CreateTask>();
 
-  newTask: CreateTask = { title: '', description: '', dueDate: '', listId: 0 };
+  newTask: CreateTask = {
+    title: '',
+    description: '',
+    dueDate: new Date().toISOString().split('T')[0],
+    listId: 0,
+  };
   showAddForm: boolean = false;
   // Crear una tarea
-  buttonCreateTask(){
-    this.createTask.emit(this.newTask)
+  buttonCreateTask() {
+    this.createTask.emit(this.newTask);
     this.toggleAddForm();
   }
 

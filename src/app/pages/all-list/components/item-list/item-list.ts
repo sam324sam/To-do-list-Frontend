@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class ItemList {
   // variables y metodos del padre
+  // Luego cambiar por un modelo
   @Input() list: any;
   @Input() userName: string = '';
   @Input() loadingListDelete: boolean = false;
@@ -27,14 +28,12 @@ export class ItemList {
   editListId: number | null = null;
   editListName: string = '';
 
-  constructor(
-    private readonly router: Router
-  ) {}
+  constructor(private readonly router: Router) {}
 
   // Navegar a la vista detalle
   viewDetailsList(): void {
     this.router.navigate(['/detal-list'], {
-      state: { listId: this.list.id, listUsername: this.list.userName },
+      state: { listId: this.list.id, listUsername: this.list.userName, listName: this.list.name },
     });
   }
 

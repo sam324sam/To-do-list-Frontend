@@ -10,7 +10,9 @@ import { TaskService } from '../../services/task.service';
 import { ItemTask } from './components/item-task/item-task';
 import { AddTaskForm } from './components/add-task-form/add-task-form';
 // Modelos
-import { CreateTask } from '../../models/createTask.model';
+import { CreateTask } from '../../models/Task/createTask.model';
+import { Task } from '../../models/Task/task.model';
+import { TaskUpdate } from '../../models/Task/taskUpdate.model';
 
 @Component({
   selector: 'app-detal-list',
@@ -19,13 +21,19 @@ import { CreateTask } from '../../models/createTask.model';
   styleUrl: './detal-list.css',
 })
 export class DetalList implements OnInit {
+  // De la lista
   listId: number = 0;
   listUsername: string = '';
-  taskList: any[] = [];
+  listName: string = '';
+
+  taskList: Task[] = [];
   loadingTasks: boolean = false;
   // Para mostrar cargando al crear una nueva tarea
   loadingTaskPost: boolean = false;
   showAddForm: boolean = false;
+  // Update de las task
+  loadingEditing: boolean = false;
+  selectIdList: number = 0;
 
   constructor(
     private readonly router: Router,
@@ -36,6 +44,7 @@ export class DetalList implements OnInit {
   ngOnInit() {
     // Obtener los datos de la lista desde el estado de navegación como un prop de vue
     this.listId = history.state['listId'];
+    this.listName = history.state['listName'];
     this.listUsername = history.state['listUsername'];
     if (!this.listId) {
       console.log('No hay datos');
@@ -92,13 +101,30 @@ export class DetalList implements OnInit {
       this.mesageService.showMesage('Lista creada con éxito', 'ok');
       // recarga desde el backend
       this.getTasks(this.listId);
-      this.loadingTaskPost = false;
       // cerrar el formulario
     } catch (error) {
       this.mesageService.showMesage('Ha ocurrido un error', 'error');
       console.log(error);
     } finally {
       this.loadingTaskPost = false;
+    }
+  }
+
+  // Editar una task
+  async updateTask(editTaskId: number, editTask: TaskUpdate): Promise<void> {
+    this.loadingEditing = true;
+    this.selectIdList = editTaskId;
+    try {
+      await firstValueFrom(this.taskService.updateTask(editTask, editTaskId));
+      this.mesageService.showMesage('Lista creada con éxito', 'ok');
+      // recarga desde el backend
+      this.getTasks(this.listId);
+    } catch (error) {
+      this.mesageService.showMesage('Ha ocurrido un error', 'error');
+      console.log(error);
+    } finally {
+      this.loadingTaskPost = false;
+      this.selectIdList = 0;
     }
   }
 }

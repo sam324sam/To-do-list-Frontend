@@ -1,12 +1,15 @@
-
 .task-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background: white;
   border: 1px solid #e0e0e0;
   border-radius: 12px;
   padding: 20px;
-  margin-bottom: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.2s, transform 0.2s;
+  box-sizing: border-box;
+  height: 100%;
 }
 
 .task-card:hover {
@@ -19,6 +22,7 @@
   justify-content: space-between;
   align-items: start;
   margin-bottom: 10px;
+  gap: 1em;
 }
 
 .task-header h3 {
@@ -31,31 +35,37 @@
 .status-badge {
   padding: 6px 12px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 0.8em;
   font-weight: 600;
   text-transform: uppercase;
   margin-left: 10px;
+  width: 11em;
+  text-align: center;
 }
 
 .status-pending {
-  background: #fff3cd;
-  color: #856404;
+  background: var(--color-status-pending);
+  color: white;
 }
 
-.status-completed {
-  background: #d4edda;
-  color: #155724;
+.status-done {
+  background: var(--color-status-done);
+  color: white;
 }
 
 .status-in_progress {
-  background: #cce5ff;
-  color: #004085;
+  background: var(--color-status-in_progress);
+  color: white;
 }
 
 .task-description {
   color: #555;
   margin: 10px 0;
   line-height: 1.5;
+  width: 100%;
+  overflow: visible;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
 .task-meta {
@@ -98,4 +108,223 @@
   border-radius: 15px;
   font-size: 13px;
   font-weight: 500;
+}
+
+.task-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  gap: 1em;
+  width: 100%;
+}
+
+.input-edit {
+  font-size: 1em;
+  transition: all 0.1s ease-in-out;
+}
+
+.input-edit:hover {
+  font-size: 1.1em;
+  color: var(--color-poppy);
+}
+
+/*Titulo de la lista para editar*/
+.form-edit {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  margin: auto;
+  gap: 0.8em;
+  width: 100%;
+  transition: all 0.3s ease;
+  animation: formEditSlideIn 0.3s ease-out;
+}
+
+.form-edit label{
+  font-size: 1.2em;
+  margin-bottom: 0.1em;
+  color: var(--color-delft-blue);
+}
+
+.form-edit input {
+  font-size: 1.4em;
+  font-weight: 600;
+  color: var(--color-delft-blue);
+  padding: 0.4em 0.8em;
+  border: 0;
+  border-bottom: 2px solid var(--color-non-photo-blue);
+  outline: none;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.9);
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+  text-overflow: clip;
+}
+
+.form-edit input:focus {
+  border-color: var(--color-ucla-blue);
+  box-shadow: 0 0 0 3px rgba(70, 117, 153, 0.15);
+  background: white;
+  border-radius: 0.7em;
+}
+
+/* Select de status*/
+.select-status {
+  appearance: none;
+  background-color: var(--color-ucla-blue);
+  color: white;
+  border-radius: 0.6em;
+  padding: 0.5em 1.2em;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+  text-align-last: center;
+  margin: auto;
+}
+
+.select-status:hover {
+  background-color: var(--color-ucla-blue-hover, #4b6b8a);
+}
+
+.select-status:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(70, 117, 153, 0.25);
+  background-color: white;
+  color: var(--color-ucla-blue);
+}
+
+.select-status-option {
+  background-color: white;
+  color: var(--color-ucla-blue);
+  text-align: center;
+}
+
+/*Texarea del description*/
+.task-description-input {
+  border: 2px solid var(--color-non-photo-blue);
+  border-radius: 0.5em;
+  resize: vertical;
+  padding: 0.8em;
+  font-size: 1.1em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.task-description-input:focus {
+  border-color: var(--color-ucla-blue) !important;
+  box-shadow: 0 0 0 3px rgba(70, 117, 153, 0.2);
+  background-color: white;
+}
+
+.task-description-input::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+/*Calenadario para editar*/
+.input-date {
+  appearance: none;
+  background-color: white;
+  border: 2px solid var(--color-non-photo-blue);
+  border-radius: 0.6em;
+  color: var(--color-ucla-blue);
+  font-size: 1em;
+  padding: 0.5em 1em;
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.input-date:hover {
+  border-color: var(--color-ucla-blue);
+}
+
+.input-date:focus {
+  outline: none;
+  border-color: var(--color-ucla-blue);
+  box-shadow: 0 0 0 3px rgba(70, 117, 153, 0.25);
+}
+
+
+.edits-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  margin: 1em;
+}
+
+.edits-button button {
+  padding: 0.5em 0.8em;
+  border-radius: 0.6em;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 85%;
+  min-width: 36px;
+  height: 36px;
+}
+
+.edits-button button:first-child {
+  background-color: var(--color-poppy);
+  color: white !important;
+}
+
+.edits-button button:first-child:hover:not(:disabled) {
+  transform: scale(1.01);
+}
+
+.edits-button button:last-child {
+  background-color: rgb(115, 221, 115);
+  color: white !important;
+}
+
+.edits-button button:last-child:hover:not(:disabled) {
+  transform: scale(1.01);
+  color: var(--color-delft-blue);
+}
+
+.edits-button button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.edits-button button i {
+  font-size: 1em;
+  pointer-events: none;
+}
+
+/* Animación de entrada del formulario */
+@keyframes formEditSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive para el formulario de edición */
+@media (max-width: 480px) {
+  .form-title-edit input {
+    font-size: 1.2em;
+  }
+
+  .edits-button button {
+    min-width: 32px;
+    height: 32px;
+    padding: 0.4em 0.7em;
+  }
 }

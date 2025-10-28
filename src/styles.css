@@ -12,6 +12,10 @@
   --color-non-photo-blue: #9ED8DB;
   --color-ucla-blue: #467599;
   --color-delft-blue: #1D3354;
+  /*Colorres que no se tocan de botones o general*/
+  --color-status-pending: #b88a00;
+  --color-status-done: #1b8d35;
+  --color-status-in_progress: #00356d;
 }
 
 * {
@@ -27,6 +31,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #e9fff9;
+  min-width: 312px;
 }
 
 html,
@@ -66,4 +71,10 @@ h1 h2 p{
 @keyframes spin {
   0% { transform: rotate(0deg);  }
   100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 480px) {
+  h1 h2 p{
+    
+  }
 }

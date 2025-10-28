@@ -1,34 +1,109 @@
 <div class="task-card">
+  @if (loadingEditing && task.id == selectIdList) {
+  <div class="loading-container">
+    <div class="spinner"></div>
+  </div>
+  } @else { @if (!isEditing) {
   <div class="task-header">
-    <h3>{{ task.title }}</h3>
+    <span class="task-title">
+      <h3>{{ task.title }}</h3>
+      <i
+        class="fa-solid fa-pencil input-edit"
+        (click)="toggleEditForm()"
+        (keydown.enter)="toggleEditForm()"
+        title="Editar nombre de la lista"
+      ></i>
+    </span>
     <span class="status-badge" [class]="'status-' + task.status.toLowerCase()">
       {{ getStatusText(task.status) }}
     </span>
   </div>
-
   <p class="task-description">{{ task.description }}</p>
+  } @else {
+  <form (submit)="buttonChangeTaskName()" class="form-edit">
+    <div class="task-header">
+      <span style="width: 100%">
+        <label for="title">Titulo de la tarea</label>
+        <input
+          type="text"
+          [(ngModel)]="editTask.title"
+          name="title"
+          required
+          autofocus
+          maxlength="255"
+          (click)="$event.stopPropagation()"
+          (keydown)="$event.stopPropagation()"
+          id="title"
+        />
+      </span>
+      <select id="status" [(ngModel)]="editTask.status" name="status" class="select-status">
+        @for (item of status; track $index) {
+        <option [value]="item.value" class="select-status-option">
+          {{ item.label }}
+        </option>
+        }
+      </select>
+    </div>
+
+    <label for="description">Descripción</label>
+    <textarea
+      class="task-description-input"
+      name="description"
+      [(ngModel)]="editTask.description"
+      rows="4"
+      cols="50"
+      maxlength="255"
+      placeholder="Escribe la descripción aquí..."
+      id="description"
+    ></textarea>
+
+    <label for="dueDate">Fecha para la finalizacion</label>
+    <input
+      class="input-date"
+      type="date"
+      id="dueDate"
+      [(ngModel)]="editTask.dueDate"
+      name="dueDate"
+      [defaultValue]="formatDate"
+      required
+      autofocus
+    />
+
+    <div class="edits-button">
+      <button type="button" (click)="toggleEditForm()" (keydown.enter)="toggleEditForm()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <button type="submit" [disabled]="!editTask.title.trim()">
+        <i class="fa-solid fa-check"></i>
+      </button>
+    </div>
+  </form>
+  }
 
   <div class="task-meta">
     <div class="meta-item">
-      <span class="meta-label">Fecha de creacion:</span>
-      <span class="meta-value">{{ formatDate(task.dueDate) }}</span>
+      <span class="meta-label">Fecha de creación:</span>
+      <span class="meta-value">{{ formatDate(task.updatedAt) }}</span>
     </div>
+
     @if (task.updatedAt) {
     <div class="meta-item">
-      <span class="meta-label">Fecha de actualizacíon:</span>
+      <span class="meta-label">Fecha para completarla:</span>
       <span class="meta-value">{{ formatDate(task.updatedAt) }}</span>
     </div>
     }
+
     <div class="meta-item">
       <span class="meta-label">Creado por:</span>
       <span class="meta-value">{{ task.userName }}</span>
     </div>
   </div>
+
   @if (task.tags && task.tags.length > 0) {
   <div class="tags">
     @for (tag of task.tags; track $index) {
-    <span class="tag">{{ tag }}</span>
+    <span class="tag">{{ tag.name }}</span>
     }
   </div>
-  }
+  } }
 </div>

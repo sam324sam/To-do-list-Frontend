@@ -2,31 +2,42 @@
   <div class="header-list">
     <span>
       <button class="back-btn" (click)="goBack()">← Volver</button>
-      <h1>{{ listUsername }}</h1>
+      <h1>{{ listName }}</h1>
       <p class="subtitle">
         Creada por: <strong>{{ listUsername }}</strong>
       </p>
     </span>
-    <div class="stat-card">
-      <span class="stat-number">{{ taskList.length || 0 }}</span>
-      <span class="stat-label">Total de tareas</span>
-    </div>
+    <span class="info-list">
+      <i class="fa-solid fa-link shared-icon" title="Lissta compartida"></i>
+      <div class="stat-card">
+        <span class="stat-number">{{ taskList.length || 0 }}</span>
+        <span class="stat-label">Total de tareas</span>
+      </div>
+    </span>
   </div>
-  <div class="tasks-container">
+  <div class="list-body">
     <h2>Tareas</h2>
-
-    @for (task of taskList; track $index) {
-    <app-item-task [task]="task"> </app-item-task>
-    <!--Si no hay tareas-->
-    } @if ( taskList.length === 0 ) {
-    <div class="empty-state">
-      <p><i class="fa-solid fa-file" style="color: black"></i> No hay tareas en esta lista</p>
+    <div class="tasks-container">
+      @for (task of taskList; track $index) {
+      <app-item-task
+        class="cell-task"
+        [task]="task"
+        [loadingEditing]="loadingEditing"
+        [selectIdList]="selectIdList"
+        (updateTask)="updateTask($event.editTaskId, $event.editTask)"
+      >
+      </app-item-task>
+      <!--Si no hay tareas-->
+      } @if ( taskList.length === 0 ) {
+      <div class="empty-state">
+        <p><i class="fa-solid fa-file" style="color: black"></i> No hay tareas en esta lista</p>
+      </div>
+      }
     </div>
-    }
+
     <!--Formulario para añadir una tarea-->
     <!-- Botón/Formulario para agregar lista -->
-    <app-add-task-form tabindex="0"
-    (createTask)="createTask($event)"
-    ></app-add-task-form>
+    <br />
+    <app-add-task-form tabindex="0" (createTask)="createTask($event)"></app-add-task-form>
   </div>
 </div>
