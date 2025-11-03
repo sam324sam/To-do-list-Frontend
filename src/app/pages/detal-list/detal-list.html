@@ -1,3 +1,14 @@
+<app-shared-list
+  [sharedList]="sharedList"
+  (togledSharedList)="togledSharedList()"
+></app-shared-list>
+<app-tag-view
+  [taskTagsView]="taskTagsView"
+  [tagView]="tagView"
+  (togleTagView)="togleTagView()"
+  (reloadTask)="reloadTask($event)"
+></app-tag-view>
+
 <div class="container">
   <div class="header-list">
     <span>
@@ -8,7 +19,12 @@
       </p>
     </span>
     <span class="info-list">
-      <i class="fa-solid fa-link shared-icon" title="Lissta compartida"></i>
+      <i
+        class="fa-solid fa-link shared-icon"
+        title="Lista compartida"
+        (click)="togledSharedList()"
+        (keydown.enter)="togledSharedList()"
+      ></i>
       <div class="stat-card">
         <span class="stat-number">{{ taskList.length || 0 }}</span>
         <span class="stat-label">Total de tareas</span>
@@ -25,6 +41,7 @@
         [loadingEditing]="loadingEditing"
         [selectIdList]="selectIdList"
         (updateTask)="updateTask($event.editTaskId, $event.editTask)"
+        (startTagsView)="startTagsView($event.taskTagsView)"
       >
       </app-item-task>
       <!--Si no hay tareas-->

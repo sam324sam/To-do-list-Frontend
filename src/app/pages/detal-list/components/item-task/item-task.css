@@ -10,6 +10,7 @@
   transition: box-shadow 0.2s, transform 0.2s;
   box-sizing: border-box;
   height: 100%;
+  flex: 1;
 }
 
 .task-card:hover {
@@ -97,17 +98,27 @@
 .tags {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: start;
   gap: 8px;
   margin-top: 15px;
 }
 
 .tag {
   background: #e3f2fd;
-  color: #1976d2;
   padding: 5px 12px;
   border-radius: 15px;
   font-size: 13px;
   font-weight: 500;
+}
+
+.button-tag{
+  transition: all 0.2s ease-in-out;
+}
+
+.button-tag:hover{
+  scale: 1.1;
+  color: var(--color-poppy);
 }
 
 .task-title {
@@ -142,7 +153,7 @@
   animation: formEditSlideIn 0.3s ease-out;
 }
 
-.form-edit label{
+.form-edit label {
   font-size: 1.2em;
   margin-bottom: 0.1em;
   color: var(--color-delft-blue);
@@ -251,7 +262,6 @@
   box-shadow: 0 0 0 3px rgba(70, 117, 153, 0.25);
 }
 
-
 .edits-button {
   display: flex;
   align-items: center;
@@ -274,18 +284,8 @@
   height: 36px;
 }
 
-.edits-button button:first-child {
-  background-color: var(--color-poppy);
-  color: white !important;
-}
-
 .edits-button button:first-child:hover:not(:disabled) {
   transform: scale(1.01);
-}
-
-.edits-button button:last-child {
-  background-color: rgb(115, 221, 115);
-  color: white !important;
 }
 
 .edits-button button:last-child:hover:not(:disabled) {

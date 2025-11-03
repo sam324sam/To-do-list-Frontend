@@ -1,6 +1,6 @@
 .container {
   width: 90%;
-  max-width: 1700px;
+  min-width: 340px;
   margin: 1.5em auto 2em auto;
   border-radius: 2em;
   padding: 3em;
@@ -65,9 +65,7 @@ h1 {
   align-items: center;
 }
 
-.shared-icon{
-  font-size: 2em;
-}
+
 
 .stat-card , .shared-icon{
   background-color: var(--color-poppy);
@@ -82,8 +80,17 @@ h1 {
   gap: 0.2em;
 }
 
-.stat-card:hover {
+.shared-icon{
+  font-size: 1em;
+  background-color: var(--color-delft-blue);
+}
+
+.stat-card:hover, .shared-icon:hover {
   scale: 1.1;
+}
+
+.shared-icon:hover{
+  cursor: pointer;
 }
 
 .stat-number {
@@ -128,7 +135,7 @@ h1 {
 
 @media (max-width: 768px) {
   .container {
-    padding: 15px;
+    padding: 1em;
   }
 
   h1 {
@@ -146,5 +153,10 @@ h1 {
 
   .status-badge {
     margin-left: 0;
+  }
+  .info-list{
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
   }
 }

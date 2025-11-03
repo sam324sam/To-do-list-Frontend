@@ -29,9 +29,16 @@ export class TaskService {
 
   // Actualizar los campos de la tarea
   updateTask(editTask: TaskUpdate, editTaskId: number) {
-    return this.http.put<any>(
+    return this.http.put<Task>(
       `${this.apiUrl}/update/${editTaskId}`,
       editTask, // cuerpo de la petición
+      { withCredentials: true }
+    );
+  }
+
+  getTaskById(taskId: number){
+    return this.http.get<Task>(
+      `${this.apiUrl}/${taskId}`,
       { withCredentials: true }
     );
   }

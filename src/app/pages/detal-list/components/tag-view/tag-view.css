@@ -1,0 +1,443 @@
+/* Overlay del modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: var(--header-width);
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Contenedor del modal */
+.modal-container {
+  width: 90%;
+  max-width: 600px;
+  max-height: 85vh;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Botón de cerrar */
+.btn-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: #f1f3f5;
+  color: #495057;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.btn-close:hover {
+  background: var(--color-poppy);
+  color: white;
+  transform: scale(1.05);
+}
+
+.btn-close:active {
+  transform: scale(0.95);
+}
+
+/* Contenido del modal */
+.modal-content {
+  padding: 24px;
+  max-height: 85vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: #f1f3f5;
+  border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: #adb5bd;
+  border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: #868e96;
+}
+
+/* Secciones */
+.tags-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tags-section-user {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #dee2e6;
+}
+
+/* Títulos de sección */
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #212529;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title i {
+  font-size: 1rem;
+}
+
+/* Grid de etiquetas */
+.tags-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Etiqueta individual */
+.tag-item {
+  position: relative;
+  min-width: 100px;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.tag-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.tag-name {
+  display: block;
+  padding: 10px 16px;
+  color: black;
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Overlay de acciones */
+.tag-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #e3f2fd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.tag-item:hover .tag-overlay {
+  opacity: 1;
+}
+
+/* Botones de las etiquetas */
+.tag-btn {
+  flex: 1;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.tag-btn:hover {
+  transform: scale(1.1);
+}
+
+.tag-btn:active {
+  transform: scale(0.95);
+}
+
+.tag-btn-remove {
+  background-color: var(--color-poppy);
+}
+
+.tag-btn-delete {
+  background-color: var(--color-poppy);
+}
+
+.tag-btn-add {
+  background-color: var(--color-status-done);
+}
+
+/* Estado vacío */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  color: #6c757d;
+  text-align: center;
+}
+
+.empty-state i {
+  font-size: 3rem;
+  margin-bottom: 12px;
+  opacity: 0.4;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Botón especial para crear etiqueta */
+/* Botón especial para crear etiqueta */
+.tag-item-create {
+  border: 2px dashed var(--color-non-photo-blue);
+}
+
+.tag-item-create .tag-name {
+  font-weight: 600;
+}
+
+.tag-item-create:hover {
+  border-color: var(--color-delft-blue);
+}
+
+.tag-item-create .tag-overlay {
+  background: var(--color-non-photo-blue);
+}
+
+.tag-btn-create{
+  background-color: var(--color-delft-blue);
+}
+
+/* Formulario de creacion de etiqueta */
+.form-name-edit {
+  margin-top: 16px;
+  padding: 16px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--color-ucla-blue);
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-name-edit input[type='text'] {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--color-non-photo-blue);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  margin-bottom: 12px;
+}
+
+.form-name-edit input[type='text']:focus {
+  outline: none;
+  border-color: var(--color-delft-blue);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.edits-button {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.edits-button button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.edits-button button[type='button'] {
+  background: #f1f3f5;
+  color: #495057;
+}
+
+.edits-button button[type='button']:hover {
+  background: var(--color-poppy);
+  color: white;
+  transform: scale(1.05);
+}
+
+.edits-button button[type='submit'] {
+  background: var(--color-status-done);
+  color: white;
+}
+
+.edits-button button[type='submit']:hover:not(:disabled) {
+  background: #28a745;
+  transform: scale(1.05);
+}
+
+.edits-button button[type='submit']:disabled {
+  background: #dee2e6;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.edits-button button:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+/* Responsive para el formulario */
+@media (max-width: 480px) {
+  .form-name-edit {
+    padding: 12px;
+  }
+
+  .form-name-edit input[type='text'] {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+
+  .edits-button button {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .modal-overlay {
+    margin-left: 0;
+    padding: 16px;
+  }
+
+  .modal-container {
+    max-width: 100%;
+  }
+
+  .modal-content {
+    padding: 20px 16px;
+  }
+
+  .section-title {
+    font-size: 1rem;
+  }
+
+  .tag-item {
+    min-width: 80px;
+  }
+
+  .tag-name {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-close {
+    width: 32px;
+    height: 32px;
+    top: 12px;
+    right: 12px;
+  }
+
+  .modal-content {
+    padding: 16px 12px;
+    gap: 20px;
+  }
+
+  .tags-section-user {
+    padding: 16px;
+  }
+
+  .tags-grid {
+    gap: 8px;
+  }
+
+  .tag-btn {
+    height: 28px;
+    font-size: 0.8rem;
+  }
+
+  .empty-state i {
+    font-size: 2.5rem;
+  }
+}

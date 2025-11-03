@@ -25,13 +25,14 @@ export class ItemTask implements OnChanges {
   @Input() loadingEditing: boolean = false;
   @Input() selectIdList: number = 0;
   @Output() updateTask = new EventEmitter<{ editTaskId: number; editTask: TaskUpdate }>();
+  @Output() startTagsView = new EventEmitter<{ taskTagsView: Task }>();
+  @Output() reloadTask = new EventEmitter<{taskId: number}>();
 
   // Objeto para mandar al backend
   editTask: TaskUpdate = {
     title: '',
     description: '',
     status: '',
-    tags: [],
     dueDate: '',
   };
 
@@ -50,7 +51,6 @@ export class ItemTask implements OnChanges {
         title: this.task.title,
         description: this.task.description,
         status: this.task.status,
-        tags: [...this.task.tags],
         dueDate: this.task.dueDate,
       };
     }
@@ -87,5 +87,10 @@ export class ItemTask implements OnChanges {
     this.updateTask.emit({ editTaskId: this.task.id, editTask: this.editTask });
     this.loadingEditing = false;
     this.toggleEditForm();
+  }
+
+  // Para la vista de las tags
+  buttonTags() {
+    this.startTagsView.emit({ taskTagsView: this.task });
   }
 }

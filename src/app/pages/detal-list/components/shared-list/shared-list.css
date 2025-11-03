@@ -1,0 +1,83 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.274);
+  z-index: 111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: var(--header-width);
+}
+
+/* Contenedor blanco */
+.search-contianer {
+  width: 35%;
+  min-width: 300px;
+  height: auto;
+  padding: 2em 1.5em;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 1em;
+  box-shadow: 0 20px 60px rgba(29, 51, 84, 0.3), 0 0 0 1px rgba(29, 51, 84, 0.05);
+}
+
+/* Botón de cerrar */
+.button-cancel {
+  position: absolute;
+  top: 0.8em;
+  right: 1em;
+  background: none;
+  color: var(--color-poppy, #e63946);
+  font-size: 1.3em;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.button-cancel:hover {
+  color: darkred;
+}
+
+/* Texto o contenido dentro del cuadro */
+.search-contianer p,
+.search-contianer span,
+.search-contianer div {
+  text-align: center;
+  font-size: 1em;
+}
+
+/*Responsive*/
+@media (max-width: 768px) {
+  .container {
+    margin-left: 0;
+    margin-top: 5em;
+  }
+  .search-contianer {
+    width: 60%;
+    padding: 1.5em;
+  }
+
+  .button-cancel {
+    font-size: 1.2em;
+  }
+}
+
+/* Móviles (pantallas pequeñas) */
+@media (max-width: 600px) {
+  .search-contianer {
+    width: 85%;
+    padding: 1.2em;
+  }
+
+  .button-cancel {
+    font-size: 1.1em;
+    top: 0.5em;
+    right: 0.7em;
+  }
+}

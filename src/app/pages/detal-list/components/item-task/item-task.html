@@ -99,11 +99,16 @@
     </div>
   </div>
 
-  @if (task.tags && task.tags.length > 0) {
   <div class="tags">
-    @for (tag of task.tags; track $index) {
+    @if (task.tags && task.tags.length > 0) { @for (tag of task.tags; track $index) {
     <span class="tag">{{ tag.name }}</span>
-    }
+    } }
+    <i
+      class="fa-solid fa-tags button-tag"
+      (click)="buttonTags()"
+      (keydown.enter)="buttonTags()"
+      title="Administrar Tags"
+    ></i>
   </div>
-  } }
+  }
 </div>

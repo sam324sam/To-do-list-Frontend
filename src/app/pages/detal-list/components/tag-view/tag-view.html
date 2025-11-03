@@ -1,0 +1,130 @@
+@if(tagView){
+<div class="modal-overlay">
+  <div class="modal-container">
+    <button
+      class="btn-close"
+      (click)="cancelTagView()"
+      (keydown.enter)="cancelTagView()"
+      aria-label="Cerrar modal"
+    >
+      <i class="fa-solid fa-x"></i>
+    </button>
+
+    <div class="modal-content">
+      <!-- Etiquetas de la tarea -->
+      <section class="tags-section">
+        <h3 class="section-title">
+          <i class="fa-solid fa-tag"></i>
+          Etiquetas de la tarea
+        </h3>
+        @if (loadingTagsByTask) {
+        <div class="loading-container">
+          <div class="spinner"></div>
+          <p>Cargando...</p>
+        </div>
+        }@else{ @if (taskTagsView.tags && taskTagsView.tags.length > 0) {
+        <div class="tags-grid">
+          @for (tag of taskTagsView.tags; track $index) {
+          <div class="tag-item">
+            <span class="tag-name">{{ tag.name }}</span>
+            <div class="tag-overlay">
+              <button
+                class="tag-btn tag-btn-remove"
+                (click)="unassignTag(tag.id)"
+                title="Quitar etiqueta"
+              >
+                <i class="fa-solid fa-arrow-down"></i>
+              </button>
+            </div>
+          </div>
+          }
+        </div>
+
+        } @else {
+        <div class="empty-state">
+          <i class="fa-solid fa-tags"></i>
+          <p>Aún no hay etiquetas para esta tarea</p>
+        </div>
+        }}
+      </section>
+
+      <!-- Etiquetas del usuario -->
+      <section class="tags-section tags-section-user">
+        <h3 class="section-title">
+          <i class="fa-solid fa-user"></i>
+          Tus etiquetas disponibles
+        </h3>
+        @if(loadingTagsByUser) {
+        <div class="loading-container">
+          <div class="spinner"></div>
+          <p>Cargando...</p>
+        </div>
+        } @else {
+        <div class="tags-grid">
+          @for (tag of tagsByUser; track $index) {
+          <div class="tag-item">
+            <span class="tag-name">{{ tag.name }}</span>
+            <div class="tag-overlay">
+              <button
+                class="tag-btn tag-btn-delete"
+                title="Eliminar etiqueta"
+                (click)="deleteTag(tag.id)"
+                (keydown.enter)="deleteTag(tag.id)"
+              >
+                <i class="fa-solid fa-trash"></i>
+              </button>
+              <button
+                class="tag-btn tag-btn-add"
+                (click)="assignTag(tag.id)"
+                (keydown.enter)="assignTag(tag.id)"
+                title="Añadir a la tarea"
+              >
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+          }
+          <div class="tag-item tag-item-create">
+            <span class="tag-name">Crear una etiqueta</span>
+            <div class="tag-overlay">
+              <button
+                class="tag-btn tag-btn-create"
+                (click)="togleFormCreateTag()"
+                (keydown.enter)="togleFormCreateTag()"
+                title="Añadir a la tarea"
+              >
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        } @if (activeCreateForm) {
+        <form (submit)="createNewTag(newTag)" class="form-name-edit">
+          <input
+            type="text"
+            [(ngModel)]="newTag"
+            name="editListName"
+            required
+            autofocus
+            (click)="$event.stopPropagation()"
+            (keydown)="$event.stopPropagation()"
+          />
+          <div class="edits-button">
+            <button
+              type="button"
+              (click)="togleFormCreateTag()"
+              (keydown.enter)="togleFormCreateTag()"
+            >
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+            <button type="submit" [disabled]="!newTag.trim()">
+              <i class="fa-solid fa-check"></i>
+            </button>
+          </div>
+        </form>
+        }
+      </section>
+    </div>
+  </div>
+</div>
+}

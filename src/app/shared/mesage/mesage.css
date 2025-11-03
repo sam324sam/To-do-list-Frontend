@@ -7,7 +7,7 @@
   color: white;
   font-weight: 500;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  z-index: 9999;
+  z-index: 99999;
   opacity: 0.95;
   transition: opacity 0.3s;
 }

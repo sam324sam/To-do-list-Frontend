@@ -9,6 +9,8 @@ import { TaskService } from '../../services/task.service';
 // Componentes
 import { ItemTask } from './components/item-task/item-task';
 import { AddTaskForm } from './components/add-task-form/add-task-form';
+import { SharedList } from './components/shared-list/shared-list';
+import { TagView } from './components/tag-view/tag-view';
 // Modelos
 import { CreateTask } from '../../models/Task/createTask.model';
 import { Task } from '../../models/Task/task.model';
@@ -16,7 +18,7 @@ import { TaskUpdate } from '../../models/Task/taskUpdate.model';
 
 @Component({
   selector: 'app-detal-list',
-  imports: [FormsModule, ItemTask, AddTaskForm],
+  imports: [FormsModule, ItemTask, AddTaskForm, SharedList, TagView],
   templateUrl: './detal-list.html',
   styleUrl: './detal-list.css',
 })
@@ -34,6 +36,22 @@ export class DetalList implements OnInit {
   // Update de las task
   loadingEditing: boolean = false;
   selectIdList: number = 0;
+
+  // Variables para las vistas de tags
+  tagView: boolean = false;
+  taskTagsView: Task = {
+    id: 0,
+    title: '',
+    description: '',
+    status: '',
+    tags: [],
+    updatedAt: '',
+    dueDate: '',
+    userName: '',
+  };
+
+  // Variables para el shared list component
+  sharedList: boolean = false;
 
   constructor(
     private readonly router: Router,
@@ -98,7 +116,7 @@ export class DetalList implements OnInit {
       // Asignar el id de la lista a la nueva tarea y la fecha
       newTask.listId = this.listId;
       await firstValueFrom(this.taskService.postTask(newTask));
-      this.mesageService.showMesage('Lista creada con éxito', 'ok');
+      this.mesageService.showMesage('Tarea creada con éxito', 'ok');
       // recarga desde el backend
       this.getTasks(this.listId);
       // cerrar el formulario
@@ -116,7 +134,7 @@ export class DetalList implements OnInit {
     this.selectIdList = editTaskId;
     try {
       await firstValueFrom(this.taskService.updateTask(editTask, editTaskId));
-      this.mesageService.showMesage('Lista creada con éxito', 'ok');
+      this.mesageService.showMesage('Tarea editada con éxito', 'ok');
       // recarga desde el backend
       this.getTasks(this.listId);
     } catch (error) {
@@ -125,6 +143,39 @@ export class DetalList implements OnInit {
     } finally {
       this.loadingTaskPost = false;
       this.selectIdList = 0;
+    }
+  }
+
+  // Para las vistas de crear tags
+  startTagsView(taskTagsView: Task) {
+    // tags de esas tareas para darle al componente
+    this.taskTagsView = taskTagsView;
+    this.togleTagView();
+  }
+
+  togleTagView() {
+    this.tagView = !this.tagView;
+  }
+  // crear una tag
+
+  // Para la vista de compartir
+  togledSharedList(): void {
+    this.sharedList = !this.sharedList;
+  }
+
+  // Esto recarga despues de assignar o designar una etiqueta en tagview
+  async reloadTask(taskId: number): Promise<void> {
+    try {
+      const updatedTask = await firstValueFrom(this.taskService.getTaskById(taskId));
+      // para la vista tag
+      this.taskTagsView = updatedTask;
+      // Actualiza el array de tareas (puede ser más eficiente que recargar lo demas)
+      const index = this.taskList.findIndex((t) => t.id === taskId);
+      if (index !== -1) {
+        this.taskList[index] = updatedTask;
+      }
+    } catch (error) {
+      console.error('Error al recargar la tarea:', error);
     }
   }
 }
