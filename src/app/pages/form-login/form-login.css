@@ -157,6 +157,11 @@ form {
   }
 }
 
+.register:hover {
+  color: var(--color-ucla-blue);
+  transform: translateY(-2px);
+}
+
 /* Botón */
 .btn-submit {
   width: 100%;

@@ -276,14 +276,15 @@
 }
 
 /* Formulario de creacion de etiqueta */
-.form-name-edit {
-  margin-top: 16px;
-  padding: 16px;
+.form-new-tag {
+  margin-top: 1em;
+  padding: 1em;
   background: white;
-  border-radius: 12px;
+  border-radius: 1em;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border: 2px solid var(--color-ucla-blue);
   animation: slideDown 0.3s ease;
+  gap: 10.5em;
 }
 
 @keyframes slideDown {
@@ -297,7 +298,7 @@
   }
 }
 
-.form-name-edit input[type='text'] {
+.form-new-tag input[type='text'] {
   width: 100%;
   padding: 12px 16px;
   border: 2px solid var(--color-non-photo-blue);
@@ -307,7 +308,7 @@
   margin-bottom: 12px;
 }
 
-.form-name-edit input[type='text']:focus {
+.form-new-tag input[type='text']:focus {
   outline: none;
   border-color: var(--color-delft-blue);
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
@@ -315,7 +316,7 @@
 
 .edits-button {
   display: flex;
-  gap: 8px;
+  gap: 0.8em;
   justify-content: flex-end;
 }
 
@@ -365,11 +366,11 @@
 
 /* Responsive para el formulario */
 @media (max-width: 480px) {
-  .form-name-edit {
+  .form-new-tag {
     padding: 12px;
   }
 
-  .form-name-edit input[type='text'] {
+  .form-new-tag input[type='text'] {
     padding: 10px 12px;
     font-size: 0.9rem;
   }

@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 // Url de la api
 import { environment } from '../../environments/environment';
+// model
+import { User } from '../models/User/user.model';
 
 // el backend se encarga de ver la sesion
 @Injectable({
@@ -41,10 +43,35 @@ export class ListService {
     );
   }
 
-  deleteShare(idList: number): Observable<string> {
-    return this.http.delete<any>(`${this.apiUrl}/share-me`, { 
-      body: idList,
-      withCredentials: true 
+  // Eliminar estar compartida
+  deleteShareMe(listId: number): Observable<string> {
+    return this.http.delete<any>(`${this.apiUrl}/share-me`, {
+      body: listId,
+      withCredentials: true,
+    });
+  }
+
+  // Añadir alguin a una lista
+  createShared(listId: number, userId: number): Observable<any> {
+    return this.http.post<any>(
+      `${this.apiUrl}/share`,
+      { listId, userId },
+      { withCredentials: true }
+    );
+  }
+
+  // eliminar
+  deleteShared(listId: number, userId: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/share`, {
+      body: { listId, userId },
+      withCredentials: true,
+    });
+  }
+
+  // ver usuario con la tarea compartida
+  getUserSharedList(listId: number): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/share/${listId}`, {
+      withCredentials: true,
     });
   }
 }

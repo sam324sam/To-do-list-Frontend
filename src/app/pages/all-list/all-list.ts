@@ -174,7 +174,7 @@ export class AllList implements OnInit {
 
     try {
       this.loadingListDelete = true;
-      await firstValueFrom(this.listService.deleteShare(idList));
+      await firstValueFrom(this.listService.deleteShareMe(idList));
 
       this.mesageService.showMesage('Acceso a la lista eliminado', 'ok');
       this.lists = this.lists.filter((list) => list.id !== idList);

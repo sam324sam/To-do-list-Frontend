@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+
 // para tokens npm install --save-dev @types/rxjs
 import { Observable, BehaviorSubject, tap } from 'rxjs';
 
 // Url de la api
 import { environment } from '../../environments/environment';
+// Modelo de usuario
+import { User } from '../models/User/user.model';
 
 // Para la respuesta del login
 interface UserLoginResponse {
@@ -95,6 +98,12 @@ export class AuthService {
 
   isLoginGuard(): boolean {
     return this.hasToken();
+  }
+
+  // Buscar he enlistar usuarios segun su nombre
+  searchUserByName(username: string): Observable<User[]> {
+    const params = new HttpParams().set('namePart', username);
+    return this.http.get<User[]>(`${this.apiUrl}/searchUser`, { params, withCredentials: true });
   }
 
   // Comprueba si existe el token en localStorage

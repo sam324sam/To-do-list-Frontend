@@ -1,12 +1,57 @@
 @if(sharedList){
-<div class="container">
-  <div class="search-contianer">
+<div class="modal-overlay">
+  <div class="shared-contianer">
     <i
-      class="fa-solid fa-x button-cancel"
+      class="fa-solid fa-x btn-close"
       (click)="cancelShared()"
       (keydown.enter)="cancelShared()"
     ></i>
-    Hola que tal
+    <div class="user-by-list-container">
+      <h3>Usuarios ya asignados</h3>
+    </div>
+    <div class="add-user-container">
+      @if (loadingUserShare) {
+      <div class="loading-container">
+        <div class="spinner"></div>
+      </div>
+      }@else {
+      <div class="container-user-share">
+        @for (user of usersShared; track $index) {
+        <span
+          class="cell-user-share"
+          (click)="deleteShared(user.username, user.id)"
+          (keydown.enter)="deleteShared(user.username, user.id)"
+          ><i class="fa-solid fa-circle-user"></i>{{ user.username }}</span
+        >
+        }
+      </div>
+      }
+    </div>
+    <h3>Ingrese el nombre del usuario a compartir</h3>
+    <div class="barr">
+      <i class="fa-solid fa-magnifying-glass icon-search"></i>
+      <input
+        [(ngModel)]="searchTerm"
+        placeholder="Buscar lista..."
+        (keyup.enter)="searchUser(searchTerm)"
+        class="input-search"
+      />
+    </div>
+    @if (loadingUser) {
+    <div class="loading-container">
+      <div class="spinner"></div>
+    </div>
+    }@else {
+    <div class="container-user">
+      @for (user of users; track $index) { @if(user.username !== adminUserName){
+      <span
+        class="cell-user"
+        (click)="createShared(user.username, user.id)"
+        (keydown.enter)="createShared(user.username, user.id)"
+        ><i class="fa-solid fa-circle-user"></i>{{ user.username }}</span
+      >} }
+    </div>
+    }
   </div>
 </div>
 }

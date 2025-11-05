@@ -282,15 +282,19 @@
   width: 85%;
   min-width: 36px;
   height: 36px;
+  color: white;
 }
 
-.edits-button button:first-child:hover:not(:disabled) {
-  transform: scale(1.01);
+.edits-button button:first-child{
+  background-color: var(--color-poppy);
 }
 
-.edits-button button:last-child:hover:not(:disabled) {
+.edits-button button:last-child{
+  background-color: var(--color-status-done);
+}
+
+.edits-button button:hover {
   transform: scale(1.01);
-  color: var(--color-delft-blue);
 }
 
 .edits-button button:disabled {

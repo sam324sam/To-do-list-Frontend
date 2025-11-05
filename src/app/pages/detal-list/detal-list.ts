@@ -28,6 +28,9 @@ export class DetalList implements OnInit {
   listUsername: string = '';
   listName: string = '';
 
+  // Nombre del usuario que observa para mostrar o no shared
+  username = localStorage.getItem('username') ?? '';
+
   taskList: Task[] = [];
   loadingTasks: boolean = false;
   // Para mostrar cargando al crear una nueva tarea
@@ -154,6 +157,10 @@ export class DetalList implements OnInit {
   }
 
   togleTagView() {
+    if(this.listUsername === this.username){
+      this.mesageService.showMesage('Que ?', 'info')
+      return;
+    }
     this.tagView = !this.tagView;
   }
   // crear una tag

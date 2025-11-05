@@ -20,7 +20,6 @@
         @if (loadingTagsByTask) {
         <div class="loading-container">
           <div class="spinner"></div>
-          <p>Cargando...</p>
         </div>
         }@else{ @if (taskTagsView.tags && taskTagsView.tags.length > 0) {
         <div class="tags-grid">
@@ -99,11 +98,12 @@
           </div>
         </div>
         } @if (activeCreateForm) {
-        <form (submit)="createNewTag(newTag)" class="form-name-edit">
+        <form (submit)="createNewTag(newTag)" class="form-new-tag">
+          <label for="tagName">Ingrese el nombre de la etiqueta</label><br><br>
           <input
             type="text"
             [(ngModel)]="newTag"
-            name="editListName"
+            name="tagName"
             required
             autofocus
             (click)="$event.stopPropagation()"

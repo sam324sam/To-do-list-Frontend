@@ -121,7 +121,7 @@ img {
     top: 4.7em;
     left: -100%;
     width: 4.4em;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 74px);
     background: var(--color-delft-blue);
     transition: left 0.3s ease;
     z-index: 1002;

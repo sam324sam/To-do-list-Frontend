@@ -1,5 +1,8 @@
 <app-shared-list
   [sharedList]="sharedList"
+  [listId]="listId"
+  [adminUserName]="listUsername"
+  [username]="username"
   (togledSharedList)="togledSharedList()"
 ></app-shared-list>
 <app-tag-view
@@ -19,12 +22,14 @@
       </p>
     </span>
     <span class="info-list">
+      @if (listUsername == username){
       <i
         class="fa-solid fa-link shared-icon"
         title="Lista compartida"
         (click)="togledSharedList()"
         (keydown.enter)="togledSharedList()"
       ></i>
+    }
       <div class="stat-card">
         <span class="stat-number">{{ taskList.length || 0 }}</span>
         <span class="stat-label">Total de tareas</span>

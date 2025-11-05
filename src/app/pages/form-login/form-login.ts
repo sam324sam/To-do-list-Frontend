@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 // Formularios reactivos
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink} from '@angular/router';
 // servicios
 import { AuthService } from '../../services/auth.service';
 import { MesageService } from '../../services/mesage.service';
 
 @Component({
   selector: 'app-form-login',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './form-login.html',
   styleUrl: './form-login.css',
 })
